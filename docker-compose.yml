@@ -1,0 +1,41 @@
+version: '2'
+
+services:
+  phpmyadmin:
+    image: phpmyadmin:5.2.1
+    ports:
+      - 8080:80
+    environment:
+      - PMA_ARBITRARY=1
+  mysql:
+    image: docker.io/bitnami/mysql:8.0.32
+    ports:
+      - '3306:3306'
+    volumes:
+      - 'mysql_data:/bitnami/mysql/data'
+    environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
+    healthcheck:
+      test: [ 'CMD', '/opt/bitnami/scripts/mysql/healthcheck.sh' ]
+      interval: 15s
+      timeout: 5s
+      retries: 6
+  myapp:
+    image: docker.io/bitnami/laravel:9.5.2
+    ports:
+      - '8000:8000'
+    environment:
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_DATABASE=bookstore
+      - DB_USERNAME=root
+    volumes:
+      - './book-store:/app'
+    depends_on:
+      - mysql
+    privileged: true
+
+volumes:
+  mysql_data:
+    driver: local
