@@ -25,6 +25,7 @@ services:
     image: docker.io/bitnami/laravel:9.5.2
     ports:
       - '8000:8000'
+      - '5137:5137'
     environment:
       - DB_HOST=mysql
       - DB_PORT=3306
