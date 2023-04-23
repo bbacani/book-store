@@ -34,7 +34,8 @@ services:
     volumes:
       - './book-store:/app'
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
     privileged: true
 
 volumes:
