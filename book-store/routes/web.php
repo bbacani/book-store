@@ -20,3 +20,9 @@ Route::get('/', function () {
 Route::get('/home', function () {
     return view('auth.dashboard');
 })->middleware('auth', 'verified');
+
+Route::middleware(['auth', 'isAdmin'])->group(function() {
+    Route::get('/admin', function () {
+        return view('admin.dashboard');
+    })->name('dashboard');
+});
