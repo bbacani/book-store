@@ -1,4 +1,5 @@
 cd book-store
+bash -c "composer config process-timeout 900"
 bash -c "composer update"
 
 cd ..
