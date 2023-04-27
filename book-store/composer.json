@@ -60,7 +60,8 @@
         "sort-packages": true,
         "allow-plugins": {
             "pestphp/pest-plugin": true
-        }
+        },
+        "process-timeout": 900
     },
     "minimum-stability": "stable",
     "prefer-stable": true
