@@ -1,0 +1,44 @@
+body {
+    padding-bottom: 25px;
+    background-color: lavender;
+}
+
+.navbar {
+    background-color: rgb(133, 180, 133);
+}
+
+.collapsing {
+    transition: none;
+}
+
+.card-img-top {
+    height: 400px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    object-fit: contain;
+    background-color: gray;
+}
+
+.card-body {
+    position: relative;
+    background-color: beige;
+}
+
+.card-footer {
+    background-color: beige;
+}
+
+.cart-btn {
+    margin-left: 5px;
+}
+
+.cart-img {
+    filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(21deg) brightness(103%) contrast(101%);
+}
+
+.more-less-btn {
+    position: absolute;
+    right: 2px;
+    bottom: 2px;
+}
