@@ -17,11 +17,23 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/books', function () {
+    return view('books');
+})->name('books');
+
+Route::get('/locations', function () {
+    return view('locations');
+})->name('locations');
+
+Route::get('/about', function () {
+    return view('about');
+})->name('about');
+
 Route::get('/home', function () {
     return view('auth.dashboard');
 })->middleware('auth', 'verified');
 
-Route::middleware(['auth', 'isAdmin'])->group(function() {
+Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/admin', function () {
         return view('admin.dashboard');
     })->name('dashboard');
