@@ -1,10 +1,10 @@
-body {
+.main-body {
     padding-bottom: 25px;
-    background-color: lavender;
+    background-color: rgb(255, 208, 208);
 }
 
 .navbar {
-    background-color: rgb(133, 180, 133);
+    background-color: rgb(240, 98, 98);
 }
 
 .collapsing {
