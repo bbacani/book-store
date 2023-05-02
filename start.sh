@@ -6,6 +6,6 @@ cd ..
 docker-compose build
 docker-compose up -d
 
-docker exec book-store-myapp-1 bash -c "php artisan migrate --force"
+docker exec book-store-myapp-1 bash -c "php artisan migrate:fresh --force --seed"
 docker exec book-store-myapp-1 bash -c "npm install"
 docker exec book-store-myapp-1 bash -c "npm run build"
