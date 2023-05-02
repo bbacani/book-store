@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\UserController;
 
 
 /*
@@ -35,7 +36,5 @@ Route::get('/home', function () {
 })->middleware('auth', 'verified');
 
 Route::middleware(['auth', 'isAdmin'])->group(function () {
-    Route::get('/admin', function () {
-        return view('admin.dashboard');
-    })->name('dashboard');
+    Route::get('/admin', [UserController::class, 'getAll'])->name('dashboard');
 });
