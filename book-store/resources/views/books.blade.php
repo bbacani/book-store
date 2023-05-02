@@ -8,7 +8,7 @@
         <!-- In Search of Lost Time by Marcel Proust -->
         <div class="col">
             <div class="card h-100">
-                <img src="assets/{{$book->book_image}}" class="card-img-top" alt="Book Cover">
+                <img src="{{$book->book_image}}" class="card-img-top" alt="Book Cover">
                 <div class="card-body">
                     <h5 class="card-title">{{$book->book_title}}</h5>
                     <p class="card-text">
