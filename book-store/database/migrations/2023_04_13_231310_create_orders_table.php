@@ -18,6 +18,7 @@ return new class extends Migration
             $table->increments('id');
             $table->date('order_date');
             $table->string('order_items');
+            $table->boolean('order_completed');
             $table->foreignId('user_id');
             $table->timestamps();
         });
