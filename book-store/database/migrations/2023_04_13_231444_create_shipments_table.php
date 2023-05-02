@@ -17,14 +17,10 @@ return new class extends Migration
         Schema::create('shipments', function (Blueprint $table) {
             $table->increments('id');
             $table->date('shipment_date');
+            $table->string('shipment_items');
             $table->foreignId('order_id');
             $table->timestamps();
         });
-
-        $s = new Shipment();
-        $s->shipment_date = date("Y/m/d");
-        $s->order_id = 1;
-        $s->save();
     }
 
     /**

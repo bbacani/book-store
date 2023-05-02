@@ -25,6 +25,7 @@ class Shipment extends Model
     protected $fillable = [
         'id',
         'shipment_date',
+        'shipment_items',
         // 'order_id',
     ];
 

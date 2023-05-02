@@ -17,14 +17,10 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
             $table->date('order_date');
-            $table->foreignId('shipment_id');
+            $table->string('order_items');
+            $table->foreignId('user_id');
             $table->timestamps();
         });
-
-        $o = new Order();
-        $o->order_date = date("Y/m/d");
-        $o->shipment_id = 1;
-        $o->save();
     }
 
     /**
