@@ -26,4 +26,10 @@ class UserController extends Controller
             'shipments' => Shipment::all(),
         ]);
     }
+
+    public function destroy(User $user)
+    {
+        $user->delete();
+        return redirect()->route('dashboard')->with('status', 'User has been deleted');
+    }
 }
