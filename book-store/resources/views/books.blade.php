@@ -3,9 +3,8 @@
 @section('content')
 <div>
     <h1>All Books</h1>
-    @foreach($books as $book)
     <div class="row gy-5 row-cols-1 row-cols-md-2 row-cols-lg-3">
-        <!-- In Search of Lost Time by Marcel Proust -->
+        @foreach($books as $book)
         <div class="col">
             <div class="card h-100">
                 <img src="{{$book->book_image}}" class="card-img-top" alt="Book Cover">
@@ -34,7 +33,7 @@
                 <button class="btn btn-primary add-to-cart-btn" data-book-id="1">Add to Cart</button>
             </div>
         </div>
+        @endforeach
     </div>
-    @endforeach
 </div>
 @endsection
