@@ -25,14 +25,23 @@ class Order extends Model
     protected $fillable = [
         'id',
         'order_date',
-        // 'customer_id',
+        'order_items',
+        // 'user_id',
     ];
 
     /**
-     * Get the shipments.
+     * Get the user that owns the order.
      */
-    public function shipments(): HasMany
+    public function user()
     {
-        return $this->hasMany(Shipment::class);
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get the shipments for the order.
+     */
+    public function shipments()
+    {
+        return $this->hasMany(Comment::class);
     }
 }
