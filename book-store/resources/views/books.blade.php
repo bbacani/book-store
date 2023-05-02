@@ -7,7 +7,9 @@
         @foreach($books as $book)
         <div class="col">
             <div class="card h-100">
-                <img src="{{$book->book_image}}" class="card-img-top" alt="Book Cover">
+                <a href="/book/{{$book->id}}">
+                    <img src="{{$book->book_image}}" class="card-img-top" alt="Book Cover">
+                </a>
                 <div class="card-body">
                     <h5 class="card-title">{{$book->book_title}}</h5>
                     <p class="card-text">
@@ -27,8 +29,12 @@
                 </div>
                 <div class="card-footer">
                     <b>Tags:</b>
-                    Classic Literature,
-                    Philosophy
+                    |
+                    @foreach($book_categories as $book_category)
+                    @if($book_category->id == $book->id)
+                    {{$book_category->category_name}} |
+                    @endif
+                    @endforeach
                 </div>
                 <button class="btn btn-primary add-to-cart-btn" data-book-id="1">Add to Cart</button>
             </div>
