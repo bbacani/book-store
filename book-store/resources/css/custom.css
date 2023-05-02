@@ -1,10 +1,9 @@
-.main-body {
-    padding: 4px;
-    background-color: rgb(254, 234, 234);
+.primary-color {
+    background-color: rgb(240, 119, 119);
 }
 
-.navbar {
-    background-color: rgb(240, 119, 119);
+.secondary-color {
+    background-color: rgb(254, 234, 234);
 }
 
 .collapsing {

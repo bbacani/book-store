@@ -18,12 +18,12 @@
     @vite(['resources/js/app.js', 'resources/css/app.scss'])
 </head>
 
-<body class="main-body">
+<body class="main-body secondary-color">
     <div id="app">
 
         <x-navbar></x-navbar>
 
-        <main class="pt-4">
+        <main class="p-4">
             @yield('content')
         </main>
     </div>

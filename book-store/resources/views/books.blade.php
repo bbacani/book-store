@@ -36,7 +36,9 @@
                     @endif
                     @endforeach
                 </div>
-                <button class="btn btn-primary add-to-cart-btn" data-book-id="1">Add to Cart</button>
+                <a href="{{route('cart.add', $book->id)}}" class="btn">
+                    <button class="btn btn-primary add-to-cart-btn" data-book-id="{{$book->id}}">Add to Cart</button>
+                </a>
             </div>
         </div>
         @endforeach

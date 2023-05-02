@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\CartController;
 
 
 /*
@@ -21,6 +22,9 @@ Route::get('/', function () {
 });
 
 Route::get('/books', [BookController::class, 'getBooks'])->name('books');
+
+Route::get('/cart', [CartController::class, 'getCart'])->name('cart');
+Route::get('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
 
 Route::get('/locations', function () {
     return view('locations');
