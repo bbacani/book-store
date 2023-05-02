@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\BookController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,9 +20,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/books', function () {
-    return view('books');
-})->name('books');
+Route::get('/books', [BookController::class, 'getBooks'])->name('books');
 
 Route::get('/locations', function () {
     return view('locations');
