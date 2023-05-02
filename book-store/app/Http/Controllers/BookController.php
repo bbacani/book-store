@@ -27,4 +27,10 @@ class BookController extends Controller
                 ->get()
         ]);
     }
+
+    public function destroy(Book $book)
+    {
+        $book->delete();
+        return redirect()->route('dashboard')->with('status', 'Book has been deleted');
+    }
 }
