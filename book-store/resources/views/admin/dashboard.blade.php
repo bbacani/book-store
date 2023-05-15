@@ -19,6 +19,7 @@
 
                     <!-- Add Admin Dashboard Content Here -->
                     <div class="card-body">
+
                         <h5>Customer list</h5>
                         <ul class="list-group">
                             @foreach ($users as $user)
@@ -49,7 +50,7 @@
                             @endforeach
                         </ul>
                         <br>
-                        <br>
+
                         <h5>Book list</h5>
                         <div class="card">
                             <div class="card-body">
@@ -82,7 +83,7 @@
                                                 <td>
                                                     <div class="btn-group" role="group" aria-label="Book actions">
                                                         <a href="{{ route('admin.books.edit', $book->id) }}"
-                                                            class="btn btn-warning btn-sm disabled">Edit</a>
+                                                            class="btn btn-warning btn-sm">Edit</a>
                                                         <form action="{{ route('admin.books.destroy', $book->id) }}"
                                                             method="POST" style="display: inline-block;">
                                                             @csrf
@@ -97,7 +98,11 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <div class="card-footer text-right">
+                                <a href="{{ route('admin.books.create') }}" class="btn btn-primary btn-sm">Add Book</a>
+                            </div>
                         </div>
+
                         <br>
                         <h5>Order list</h5>
                         <ul class="list-group">
@@ -122,6 +127,7 @@
                             @endforeach
                         </ul>
                         <br>
+
                         <h5>Shipment list</h5>
                         <ul class="list-group">
                             @foreach ($shipments as $shipment)
@@ -145,6 +151,7 @@
                             @endforeach
                         </ul>
                         <br>
+
                         <h5>Category list</h5>
                         <ul class="list-group">
                             @foreach ($categories as $category)
@@ -162,7 +169,6 @@
                         </ul>
                         <br>
                     </div>
-
                 </div>
             </div>
         </div>
