@@ -25,7 +25,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/books', [BookController::class, 'getBooks'])->name('books');
+Route::get('/books', [BookController::class, 'show'])->name('books.show');
 
 Route::get('/cart', [CartController::class, 'getCart'])->name('cart');
 Route::get('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
@@ -53,8 +53,9 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     // Books
     Route::delete('/admin/books/{book}', [BookController::class, 'destroy'])->name('admin.books.destroy');
     Route::get('/admin/books/create', [BookController::class, 'create'])->name('admin.books.create');
+    Route::post('/admin/books/store', [BookController::class, 'store'])->name('admin.books.store');
     Route::get('/admin/books/{book}/edit', [BookController::class, 'edit'])->name('admin.books.edit');
-
+    Route::put('/admin/books/{book}', [BookController::class, 'update'])->name('admin.books.update');
 
     // Orders
     Route::delete('/admin/orders/{order}', [OrderController::class, 'destroy'])->name('admin.orders.destroy');
