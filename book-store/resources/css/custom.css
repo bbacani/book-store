@@ -49,3 +49,7 @@ h1 {
 .toggle-list {
     align-self: center;
 }
+
+.btn {
+    margin: 4px;
+}
