@@ -37,14 +37,14 @@
                                         </li>
                                     </div>
                                     <div>
+                                        <a href="{{ route('admin.users.edit', $user->id) }}"
+                                            class="btn btn-warning btn-lg ml-2">Edit</a>
                                         <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST"
                                             style="display: inline-block;">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger btn-lg">Delete</button>
                                         </form>
-                                        <a href="{{ route('admin.users.edit', $user->id) }}"
-                                            class="btn btn-warning btn-lg ml-2 disabled">Edit</a>
                                     </div>
                                 </div>
                             @endforeach

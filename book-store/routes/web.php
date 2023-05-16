@@ -43,12 +43,12 @@ Route::get('/home', function () {
 })->middleware('auth', 'verified');
 
 Route::middleware(['auth', 'isAdmin'])->group(function () {
-    Route::get('/admin', [UserController::class, 'getAll'])->name('dashboard');
+    Route::get('/admin', [UserController::class, 'index'])->name('dashboard');
 
     // Users
     Route::delete('/admin/users/{user}', [UserController::class, 'destroy'])->name('admin.users.destroy');
-    Route::get('/admin/users/create', [UserController::class, 'create'])->name('admin.users.create');
     Route::get('/admin/users/{user}/edit', [UserController::class, 'edit'])->name('admin.users.edit');
+    Route::put('/admin/users/{user}', [UserController::class, 'update'])->name('admin.users.update');
 
     // Books
     Route::delete('/admin/books/{book}', [BookController::class, 'destroy'])->name('admin.books.destroy');
