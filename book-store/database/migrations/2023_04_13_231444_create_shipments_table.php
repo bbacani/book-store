@@ -15,10 +15,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('shipments', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->date('shipment_date');
             $table->string('shipment_items');
-            $table->foreignId('order_id');
+            $table->boolean('shipment_completed');
+            $table->foreignId('order_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
