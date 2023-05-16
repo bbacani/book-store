@@ -25,7 +25,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/books', [BookController::class, 'show'])->name('books.show');
+Route::get('/books', [BookController::class, 'index'])->name('books.index');
 
 Route::get('/cart', [CartController::class, 'getCart'])->name('cart.cart');
 Route::get('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
@@ -45,12 +45,12 @@ Route::get('/home', function () {
 })->middleware('auth', 'verified');
 
 Route::middleware(['auth', 'isAdmin'])->group(function () {
-    Route::get('/admin', [UserController::class, 'getAll'])->name('dashboard');
+    Route::get('/admin', [UserController::class, 'index'])->name('dashboard');
 
     // Users
     Route::delete('/admin/users/{user}', [UserController::class, 'destroy'])->name('admin.users.destroy');
-    Route::get('/admin/users/create', [UserController::class, 'create'])->name('admin.users.create');
     Route::get('/admin/users/{user}/edit', [UserController::class, 'edit'])->name('admin.users.edit');
+    Route::put('/admin/users/{user}', [UserController::class, 'update'])->name('admin.users.update');
 
     // Books
     Route::delete('/admin/books/{book}', [BookController::class, 'destroy'])->name('admin.books.destroy');
@@ -72,5 +72,7 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     // Categories
     Route::delete('/admin/categories/{category}', [CategoryController::class, 'destroy'])->name('admin.categories.destroy');
     Route::get('/admin/categories/create', [CategoryController::class, 'create'])->name('admin.categories.create');
+    Route::post('/admin/categories/store', [CategoryController::class, 'store'])->name('admin.categories.store');
     Route::get('/admin/categories/{category}/edit', [CategoryController::class, 'edit'])->name('admin.categories.edit');
+    Route::put('/admin/categories/{category}', [CategoryController::class, 'update'])->name('admin.categories.update');
 });

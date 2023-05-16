@@ -11,6 +11,7 @@ class ShipmentController extends Controller
     public function destroy(Shipment $shipment)
     {
         $shipment->delete();
+        
         return redirect()->route('dashboard')->with('status', 'Shipment has been deleted');
     }
 }

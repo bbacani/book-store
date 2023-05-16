@@ -46,6 +46,10 @@ h1 {
     margin: 10px;
 }
 
+.toggle-list {
+    align-self: center;
+}
+
 .btn {
     margin: 4px;
 }

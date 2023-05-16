@@ -44,14 +44,6 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     /**
-     * Get the order that owns the shipment.
-     */
-    public function order()
-    {
-        return $this->belongsTo(Order::class);
-    }
-
-    /**
      * Get the orders for the user.
      */
     public function orders()
