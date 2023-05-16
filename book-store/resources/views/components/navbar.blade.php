@@ -12,7 +12,7 @@
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('books.show') }}">{{ __('Books') }}</a>
+                    <a class="nav-link" href="{{ route('books.index') }}">{{ __('Books') }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('locations') }}">{{ __('Store locations') }}</a>
@@ -37,8 +37,8 @@
                     </li>
                 @endif
                 <!-- <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li> -->
+                                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                                </li> -->
             @else
                 {{-- @if (Auth::user()->email_verified_at) --}}
                 <div class="dropdown">
