@@ -102,8 +102,50 @@
                                 <a href="{{ route('admin.books.create') }}" class="btn btn-primary btn-sm">Add Book</a>
                             </div>
                         </div>
-
                         <br>
+
+                        <h5>Category list</h5>
+                        <div class="card">
+                            <div class="card-body">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Id</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($categories as $category)
+                                            <tr>
+                                                <th scope="row">{{ $category->id }}</th>
+                                                <td>{{ $category->category_name }}</td>
+                                                <td>
+                                                    <div class="btn-group" role="group" aria-label="Category actions">
+                                                        <a href="{{ route('admin.categories.edit', $category->id) }}"
+                                                            class="btn btn-warning btn-sm">Edit</a>
+                                                        <form
+                                                            action="{{ route('admin.categories.destroy', $category->id) }}"
+                                                            method="POST" style="display: inline-block;">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit"
+                                                                class="btn btn-danger btn-sm">Delete</button>
+                                                        </form>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="card-footer text-right">
+                                <a href="{{ route('admin.categories.create') }}" class="btn btn-primary btn-sm">Add
+                                    Category</a>
+                            </div>
+                        </div>
+                        <br>
+
                         <h5>Order list</h5>
                         <ul class="list-group">
                             @foreach ($orders as $order)
@@ -150,24 +192,6 @@
                                 </li>
                             @endforeach
                         </ul>
-                        <br>
-
-                        <h5>Category list</h5>
-                        <ul class="list-group">
-                            @foreach ($categories as $category)
-                                <li class="list-group-item">{{ $category->category_name }}
-                                    <div class="float-right">
-                                        <form action="{{ route('admin.categories.destroy', $category->id) }}"
-                                            method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                        </form>
-                                    </div>
-                                </li>
-                            @endforeach
-                        </ul>
-                        <br>
                     </div>
                 </div>
             </div>

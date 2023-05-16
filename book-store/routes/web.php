@@ -25,7 +25,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/books', [BookController::class, 'show'])->name('books.show');
+Route::get('/books', [BookController::class, 'index'])->name('books.index');
 
 Route::get('/cart', [CartController::class, 'getCart'])->name('cart');
 Route::get('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
@@ -70,5 +70,7 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     // Categories
     Route::delete('/admin/categories/{category}', [CategoryController::class, 'destroy'])->name('admin.categories.destroy');
     Route::get('/admin/categories/create', [CategoryController::class, 'create'])->name('admin.categories.create');
+    Route::post('/admin/categories/store', [CategoryController::class, 'store'])->name('admin.categories.store');
     Route::get('/admin/categories/{category}/edit', [CategoryController::class, 'edit'])->name('admin.categories.edit');
+    Route::put('/admin/categories/{category}', [CategoryController::class, 'update'])->name('admin.categories.update');
 });
