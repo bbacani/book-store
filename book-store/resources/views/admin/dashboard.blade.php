@@ -59,30 +59,65 @@
                         </h5>
                         <ul class="list-group order-list">
                             @foreach ($orders as $order)
-                                <li class="list-group-item">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div>
-                                            <div>Customer Id: {{ $order->user_id }}</div>
-                                            <div>Customer Name: {{ $order->user_name }}</div>
-                                            <div>Order Items Ids: {{ $order->order_items }}</div>
-                                            <div>Order Completed:
-                                                @if ($order->order_completed == 1)
-                                                    Yes
-                                                @else
-                                                    No
-                                                @endif
+                                <div class="card-body d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <li class="list-group-item">Customer Id: {{ $order->user_id }}</li>
+                                        <li class="list-group-item">Customer Name: {{ $order->user_name }}</li>
+                                        <li class="list-group-item">Order Items: <div class="card">
+                                                <div class="card-body">
+                                                    <table class="table table-hover">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col">{{ __('Id') }}</th>
+                                                                <th scope="col">{{ __('Title') }}</th>
+                                                                <th scope="col">{{ __('Image') }}</th>
+                                                                <th scope="col">{{ __('Pages') }}</th>
+                                                                <th scope="col">{{ __('Price') }}</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (explode('|', $order->order_items) as $bookId)
+                                                                @php $book = $books->firstWhere('id', $bookId); @endphp
+                                                                @if ($book)
+                                                                    <tr>
+                                                                        <th scope="row">{{ $book->id }}</th>
+                                                                        <td>{{ $book->book_title }}</td>
+                                                                        <td>
+                                                                            <a href="{{ $book->book_image }}"
+                                                                                target="_blank">
+                                                                                <img src="{{ $book->book_image }}"
+                                                                                    alt="{{ $book->book_title }}"
+                                                                                    height="50">
+                                                                            </a>
+                                                                        </td>
+                                                                        <td>{{ $book->book_pages }}</td>
+                                                                        <td>{{ $book->book_price }}</td>
+                                                                    </tr>
+                                                                @endif
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                             </div>
-                                            <div>Date: {{ $order->order_date }}</div>
-                                        </div>
-                                        <div>
-                                            <form action="{{ route('admin.orders.destroy', $order->id) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-lg">Delete</button>
-                                            </form>
-                                        </div>
+                                        </li>
+                                        <li class="list-group-item">Order Subtotal: {{ $order->order_subtotal }}</li>
+                                        <li class="list-group-item">Order Completed:
+                                            @if ($order->order_completed == 1)
+                                                Yes
+                                            @else
+                                                No
+                                            @endif
+                                        </li>
+                                        <li class="list-group-item">Date: {{ $order->order_date }}</li>
                                     </div>
-                                </li>
+                                    <div>
+                                        <form action="{{ route('admin.orders.destroy', $order->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-lg">Delete</button>
+                                        </form>
+                                    </div>
+                                </div>
                             @endforeach
                         </ul>
                         <br>
@@ -93,30 +128,67 @@
                         </h5>
                         <ul class="list-group shipment-list">
                             @foreach ($shipments as $shipment)
-                                <li class="list-group-item">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div>
-                                            <div>Order Id: {{ $shipment->order_id }}</div>
-                                            <div>Shipment Items Ids: {{ $shipment->shipment_items }}</div>
-                                            <div>Shipment Completed:
-                                                @if ($shipment->shipment_completed == 1)
-                                                    Yes
-                                                @else
-                                                    No
-                                                @endif
+                                <div class="card-body d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <li class="list-group-item">Order Id: {{ $shipment->order_id }}</li>
+                                        <li class="list-group-item">Shipment Items:
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <table class="table table-hover">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col">{{ __('Id') }}</th>
+                                                                <th scope="col">{{ __('Title') }}</th>
+                                                                <th scope="col">{{ __('Image') }}</th>
+                                                                <th scope="col">{{ __('Pages') }}</th>
+                                                                <th scope="col">{{ __('Price') }}</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (explode('|', $shipment->shipment_items) as $book_id)
+                                                                @php
+                                                                    $book = App\Models\Book::find($book_id);
+                                                                @endphp
+                                                                @if ($book)
+                                                                    <tr>
+                                                                        <th scope="row">{{ $book->id }}</th>
+                                                                        <td>{{ $book->book_title }}</td>
+                                                                        <td>
+                                                                            <a href="{{ $book->book_image }}"
+                                                                                target="_blank">
+                                                                                <img src="{{ $book->book_image }}"
+                                                                                    alt="{{ $book->book_title }}"
+                                                                                    height="50">
+                                                                            </a>
+                                                                        </td>
+                                                                        <td>{{ $book->book_pages }}</td>
+                                                                        <td>{{ $book->book_price }}</td>
+                                                                    </tr>
+                                                                @endif
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                             </div>
-                                            <div>Date: {{ $shipment->shipment_date }}</div>
-                                        </div>
-                                        <div>
-                                            <form action="{{ route('admin.shipments.destroy', $shipment->id) }}"
-                                                method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-lg">Delete</button>
-                                            </form>
-                                        </div>
+                                        </li>
+                                        <li class="list-group-item">Shipment Sent:
+                                            @if ($shipment->shipment_sent == 1)
+                                                Yes
+                                            @else
+                                                No
+                                            @endif
+                                        </li>
+                                        <li class="list-group-item">Date: {{ $shipment->shipment_date }}</li>
                                     </div>
-                                </li>
+                                    <div>
+                                        <form action="{{ route('admin.shipments.destroy', $shipment->id) }}"
+                                            method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-lg">Delete</button>
+                                        </form>
+                                    </div>
+                                </div>
                             @endforeach
                         </ul>
                         <br>
@@ -198,7 +270,8 @@
                                                     <th scope="row">{{ $category->id }}</th>
                                                     <td>{{ $category->category_name }}</td>
                                                     <td>
-                                                        <div class="btn-group" role="group" aria-label="Category actions">
+                                                        <div class="btn-group" role="group"
+                                                            aria-label="Category actions">
                                                             <a href="{{ route('admin.categories.edit', $category->id) }}"
                                                                 class="btn btn-warning btn-sm">Edit</a>
                                                             <form
