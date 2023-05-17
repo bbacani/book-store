@@ -21,9 +21,10 @@ class UserController extends Controller
             'books' => Book::all(),
             'categories' => Category::all(),
             'orders' => DB::table('orders')
-                ->join('users', 'orders.user_id', '=', 'users.id')
-                ->select('orders.*', 'users.id AS user_id', 'users.name AS user_name')
-                ->get(),
+                        ->join('users', 'orders.user_id', '=', 'users.id')
+                        ->select('orders.*', 'users.id AS user_id', 'users.name AS user_name')
+                        ->where('order_completed', '=', true)
+                        ->get(),
             'shipments' => Shipment::all(),
         ]);
     }
