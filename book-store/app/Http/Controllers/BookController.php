@@ -63,8 +63,9 @@ class BookController extends Controller
     public function edit($id)
     {
         $book = Book::findOrFail($id);
+        $categories = Category::all();
 
-        return view('admin.books.edit', compact('book'));
+        return view('admin.books.edit', compact('book', 'categories'));
     }
 
     public function update(Request $request, $id)
@@ -76,6 +77,8 @@ class BookController extends Controller
         $book->book_image = $request->image;
         $book->book_pages = $request->pages;
         $book->book_price = $request->price;
+
+        $book->categories()->sync($request->categories);
 
         $book->save();
 
