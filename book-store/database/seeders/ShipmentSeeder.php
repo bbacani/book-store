@@ -19,21 +19,21 @@ class ShipmentSeeder extends Seeder
         DB::table('shipments')->insert([
             'shipment_date' => Carbon::create('2024', '02', '24'),
             'shipment_items' => '1|2',
-            'shipment_completed' => true,
+            'shipment_sent' => true,
             'order_id' => '1',
         ]);
 
         DB::table('shipments')->insert([
             'shipment_date' => Carbon::create('2024', '02', '24'),
             'shipment_items' => '1',
-            'shipment_completed' => false,
+            'shipment_sent' => true,
             'order_id' => '2',
         ]);
 
         DB::table('shipments')->insert([
             'shipment_date' => Carbon::create('2024', '02', '27'),
             'shipment_items' => '3',
-            'shipment_completed' => false,
+            'shipment_sent' => false,
             'order_id' => '2',
         ]);
     }
