@@ -37,7 +37,9 @@ class BookController extends Controller
 
     public function create()
     {
-        return view('admin.books.create');
+        $categories = Category::all();
+
+        return view('admin.books.create', compact('categories'));
     }
 
     public function store(Request $request)
@@ -51,6 +53,9 @@ class BookController extends Controller
         $book->book_price = $request->price;
 
         $book->save();
+
+        $categories = $request->input('categories', []);
+        $book->categories()->sync($categories);
 
         return redirect()->route('dashboard')->with('status', 'Book has been created');
     }

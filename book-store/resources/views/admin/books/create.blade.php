@@ -48,6 +48,13 @@
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
+            <div class="form-group">
+                <label for="categories">Categories</label><br>
+                @foreach ($categories as $category)
+                    <input type="checkbox" name="categories[]" value="{{ $category->id }}">
+                    {{ $category->category_name }}<br>
+                @endforeach
+            </div>
             <button type="submit" class="btn btn-primary">Create</button>
         </form>
     </div>
