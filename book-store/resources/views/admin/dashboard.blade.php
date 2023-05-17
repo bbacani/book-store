@@ -38,9 +38,10 @@
                                             @endif
                                         </li>
                                     </div>
-                                    <div>
+                                    <div d-flex>
                                         <a href="{{ route('admin.users.edit', $user->id) }}"
-                                            class="btn btn-warning btn-lg ml-2">Edit</a>
+                                            class="btn btn-warning btn-lg ml-2">Edit
+                                        </a>
                                         <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST"
                                             style="display: inline-block;">
                                             @csrf
@@ -110,7 +111,10 @@
                                         </li>
                                         <li class="list-group-item">Date: {{ $order->order_date }}</li>
                                     </div>
-                                    <div>
+                                    <div class="d-flex">
+                                        <a href="{{ route('admin.shipments.create', $order->id) }}"
+                                            class="btn btn-primary btn-lg">Ship
+                                        </a>
                                         <form action="{{ route('admin.orders.destroy', $order->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
@@ -228,7 +232,8 @@
                                                 <td>
                                                     <div class="btn-group" role="group" aria-label="Book actions">
                                                         <a href="{{ route('admin.books.edit', $book->id) }}"
-                                                            class="btn btn-warning btn-sm">Edit</a>
+                                                            class="btn btn-warning btn-sm">Edit
+                                                        </a>
                                                         <form action="{{ route('admin.books.destroy', $book->id) }}"
                                                             method="POST" style="display: inline-block;">
                                                             @csrf
@@ -273,7 +278,8 @@
                                                         <div class="btn-group" role="group"
                                                             aria-label="Category actions">
                                                             <a href="{{ route('admin.categories.edit', $category->id) }}"
-                                                                class="btn btn-warning btn-sm">Edit</a>
+                                                                class="btn btn-warning btn-sm">Edit
+                                                            </a>
                                                             <form
                                                                 action="{{ route('admin.categories.destroy', $category->id) }}"
                                                                 method="POST" style="display: inline-block;">
