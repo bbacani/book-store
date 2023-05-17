@@ -9,11 +9,11 @@ use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
-    public function show(): View
+    public function index(): View
     {
         $books = Book::all();
 
-        return view('books.show', [
+        return view('books.index', [
             'books' => $books,
             'book_categories' => DB::table('book_categories')
                 ->join('books', 'book_categories.book_id', '=', 'books.id')
