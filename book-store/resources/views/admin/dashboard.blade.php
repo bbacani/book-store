@@ -215,7 +215,7 @@
                                             <th scope="col">Description</th>
                                             <th scope="col">Pages</th>
                                             <th scope="col">Price</th>
-                                            <th scope="col">Tags</th>
+                                            <th scope="col">Categories</th>
                                             <th scope="col">Actions</th>
                                         </tr>
                                     </thead>
