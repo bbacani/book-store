@@ -15,9 +15,6 @@ class CartController extends Controller
 {
     public function getCart(): View
     {
-
-        Log::debug(Auth::id());
-
         $book_ids = Order::where('user_id', Auth::id())->where('order_completed', false)->first();
         $books = [];
         $subtotal = 0;
@@ -38,11 +35,10 @@ class CartController extends Controller
 
     public function add($item_id)
     {
-        $userid = Auth::id();
-        Log::debug($userid);
-        if ($userid == null) {
-            redirect('/login');
+        if (!Auth::check()) {
+            return redirect('/login');
         }
+        $userid = Auth::id();
         $order = Order::where('user_id', $userid)->where('order_completed', false)->first();
         if ($order == null) {
             $order = new Order();
@@ -62,15 +58,13 @@ class CartController extends Controller
         return view('cart.payment');
     }
 
-    public function buy($status)
+    public function buy()
     {
-        $userid = Auth::id();
-        Log::debug($userid);
-        if ($userid == null) {
-            redirect('/login');
+        if (!Auth::check()) {
+            return redirect('/login');
         }
-        $order = Order::where('user_id', $userid)->where('order_completed', false)->first();
-        $order->order_completed = $status;
+        $order = Order::where('user_id', Auth::id())->where('order_completed', false)->first();
+        $order->order_completed = true;
         $order->save();
         return redirect('/books');
     }

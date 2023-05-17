@@ -13,3 +13,7 @@ After running the ./start.sh script you can find the app running on http://local
 ## Admin Credentials
 email: admin@gmail.com <br/>
 password: 111111
+
+## Test User Credentials
+email: test1@gmail.com
+password: 111111

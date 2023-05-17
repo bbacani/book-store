@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BookController;
@@ -21,16 +22,15 @@ use App\Http\Controllers\ShipmentController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/', [BookController::class, 'show'])->name('books.show');
 
 Route::get('/books', [BookController::class, 'index'])->name('books.index');
 
 Route::get('/cart', [CartController::class, 'getCart'])->name('cart.cart');
 Route::get('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
 Route::get('/cart/payment', [CartController::class, 'payment'])->name('cart.payment');
-Route::get('/cart/buy/{status}', [CartController::class, 'buy'])->name('cart.buy');
+Route::get('/cart/buy', [CartController::class, 'buy'])->name('cart.buy');
 
 Route::get('/locations', function () {
     return view('locations');
