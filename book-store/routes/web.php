@@ -22,8 +22,7 @@ use App\Http\Controllers\ShipmentController;
 |
 */
 
-
-Route::get('/', [BookController::class, 'show'])->name('books.show');
+Route::get('/', [BookController::class, 'index'])->name('books.index');
 
 Route::get('/books', [BookController::class, 'index'])->name('books.index');
 
