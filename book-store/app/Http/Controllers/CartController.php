@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Order;
 use App\Models\Book;
+use App\Mail\OrderConfirmation;
 
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Arr;
 use Illuminate\View\View;
 use Carbon\Carbon;
@@ -49,6 +52,7 @@ class CartController extends Controller
             $order->order_items = $order->order_items . '|';
         }
         $order->order_items = $order->order_items . $item_id;
+        $order->order_subtotal = 100;
         $order->save();
         return redirect('/books');
     }
@@ -66,6 +70,12 @@ class CartController extends Controller
         $order = Order::where('user_id', Auth::id())->where('order_completed', false)->first();
         $order->order_completed = true;
         $order->save();
+
+        $user = User::where('id', Auth::id())->first();
+
+        // Send email to user
+        Mail::to($user->email)->send(new OrderConfirmation($order));
+
         return redirect('/books');
     }
 }
