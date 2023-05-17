@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <h1>Edit Shipment</h1>
-        <form method="POST" action="{{ route('admin.shipments.update', $shipment->id) }}">
+        <form form id="shipment_form" method="POST" action="{{ route('admin.shipments.update', $shipment->id) }}">
             @csrf
             @method('PUT')
             <div class="form-group">
@@ -45,4 +45,20 @@
             <button type="submit" class="btn btn-primary">Update Shipment</button>
         </form>
     </div>
+
+    <script>
+        document.getElementById('shipment_form').addEventListener('submit', function(event) {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"][name="shipment_items[]"]');
+            let checked = false;
+            checkboxes.forEach(function(checkbox) {
+                if (checkbox.checked) {
+                    checked = true;
+                }
+            });
+            if (!checked) {
+                event.preventDefault();
+                alert('Please select at least one shipment item.');
+            }
+        });
+    </script>
 @endsection

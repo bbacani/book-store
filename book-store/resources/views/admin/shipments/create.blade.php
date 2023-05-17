@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <h1>Create Shipment</h1>
-        <form method="POST" action="{{ route('admin.shipments.store', $order->id) }}">
+        <form id="shipment_form" method="POST" action="{{ route('admin.shipments.store', $order->id) }}">
             @csrf
             <div class="form-group">
                 <label for="shipment_date">Shipment Date</label>
@@ -42,4 +42,20 @@
             <button type="submit" class="btn btn-primary">Create Shipment</button>
         </form>
     </div>
+
+    <script>
+        document.getElementById('shipment_form').addEventListener('submit', function(event) {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"][name="shipment_items[]"]');
+            let checked = false;
+            checkboxes.forEach(function(checkbox) {
+                if (checkbox.checked) {
+                    checked = true;
+                }
+            });
+            if (!checked) {
+                event.preventDefault();
+                alert('Please select at least one shipment item.');
+            }
+        });
+    </script>
 @endsection
