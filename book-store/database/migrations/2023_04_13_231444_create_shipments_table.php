@@ -18,7 +18,7 @@ return new class extends Migration
             $table->id();
             $table->date('shipment_date');
             $table->string('shipment_items');
-            $table->boolean('shipment_completed');
+            $table->boolean('shipment_sent');
             $table->foreignId('order_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });

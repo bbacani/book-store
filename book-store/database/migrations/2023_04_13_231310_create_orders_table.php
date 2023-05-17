@@ -16,6 +16,7 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->double('order_subtotal');
             $table->date('order_date');
             $table->string('order_items');
             $table->boolean('order_completed');

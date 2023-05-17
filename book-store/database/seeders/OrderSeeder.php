@@ -17,6 +17,7 @@ class OrderSeeder extends Seeder
     public function run()
     {
         DB::table('orders')->insert([
+            'order_subtotal' => '84.41',
             'order_date' => Carbon::create('2024', '02', '24'),
             'order_items' => '1|2',
             'order_completed' => true,
@@ -24,9 +25,10 @@ class OrderSeeder extends Seeder
         ]);
 
         DB::table('orders')->insert([
-            'order_date' => Carbon::create('2024', '02', '25'),
+            'order_subtotal' => '91.78',
+            'order_date' => Carbon::create('2024', '02', '24'),
             'order_items' => '1|3',
-            'order_completed' => false,
+            'order_completed' => true,
             'user_id' => '3',
         ]);
     }

@@ -66,8 +66,10 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
 
     // Shipments
     Route::delete('/admin/shipments/{shipment}', [ShipmentController::class, 'destroy'])->name('admin.shipments.destroy');
-    Route::get('/admin/shipments/create', [ShipmentController::class, 'create'])->name('admin.shipments.create');
+    Route::get('/admin/shipments/{order_id}/create', [ShipmentController::class, 'create'])->name('admin.shipments.create');
+    Route::post('/admin/shipments/{order_id}/store', [ShipmentController::class, 'store'])->name('admin.shipments.store');
     Route::get('/admin/shipments/{shipment}/edit', [ShipmentController::class, 'edit'])->name('admin.shipments.edit');
+    Route::put('/admin/shipments/{shipment}', [ShipmentController::class, 'update'])->name('admin.shipments.update');
 
     // Categories
     Route::delete('/admin/categories/{category}', [CategoryController::class, 'destroy'])->name('admin.categories.destroy');
