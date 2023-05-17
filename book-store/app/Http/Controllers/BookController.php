@@ -3,15 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
-    public function index(): View
+    public function index(Request $request): View
     {
-        $books = Book::all();
+        $query = Book::query();
+
+        if ($request->has('category')) {
+            $query->whereHas('categories', function ($q) use ($request) {
+                $q->where('id', $request->category);
+            });
+        }
+
+        $books = $query->get();
+        $categories = Category::all();
 
         return view('books.index', [
             'books' => $books,
@@ -19,7 +29,9 @@ class BookController extends Controller
                 ->join('books', 'book_categories.book_id', '=', 'books.id')
                 ->join('categories', 'book_categories.category_id', '=', 'categories.id')
                 ->select('book_categories.*', 'books.*', 'categories.category_name')
-                ->get()
+                ->get(),
+            'categories' => $categories,
+            'selected_category' => $request->category
         ]);
     }
 
