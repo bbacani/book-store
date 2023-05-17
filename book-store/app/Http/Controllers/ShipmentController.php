@@ -29,6 +29,27 @@ class ShipmentController extends Controller
         return redirect()->route('dashboard')->with('status', 'Shipment has been created');
     }
 
+    public function edit($id)
+    {
+        $shipment = Shipment::findOrFail($id);
+        $order = DB::table('orders')->where('id', $shipment->order_id)->first();
+
+        return view('admin.shipments.edit', compact('shipment', 'order'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $shipment = Shipment::findOrFail($id);
+
+        $shipment->shipment_date = $request->shipment_date;
+        $shipment->shipment_items = implode('|', $request->shipment_items);
+        $shipment->shipment_sent = false;
+
+        $shipment->save();
+
+        return redirect()->route('dashboard')->with('status', 'Shipment has been updated');
+    }
+
     public function destroy(Shipment $shipment)
     {
         $shipment->delete();

@@ -40,7 +40,7 @@
                                     </div>
                                     <div d-flex>
                                         <a href="{{ route('admin.users.edit', $user->id) }}"
-                                            class="btn btn-warning btn-lg ml-2">Edit
+                                            class="btn btn-warning btn-lg">Edit
                                         </a>
                                         <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST"
                                             style="display: inline-block;">
@@ -184,7 +184,10 @@
                                         </li>
                                         <li class="list-group-item">Date: {{ $shipment->shipment_date }}</li>
                                     </div>
-                                    <div>
+                                    <div class="d-flex">
+                                        <a href="{{ route('admin.shipments.edit', $shipment->id) }}"
+                                            class="btn btn-warning btn-lg">Edit
+                                        </a>
                                         <form action="{{ route('admin.shipments.destroy', $shipment->id) }}"
                                             method="POST">
                                             @csrf
