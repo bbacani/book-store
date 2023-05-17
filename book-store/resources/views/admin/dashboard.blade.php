@@ -102,6 +102,7 @@
                                             </div>
                                         </li>
                                         <li class="list-group-item">Order Subtotal: {{ $order->order_subtotal }}</li>
+                                        <li class="list-group-item">Order Date: {{ $order->order_date }}</li>
                                         <li class="list-group-item">Order Completed:
                                             @if ($order->order_completed == 1)
                                                 Yes
@@ -109,7 +110,6 @@
                                                 No
                                             @endif
                                         </li>
-                                        <li class="list-group-item">Date: {{ $order->order_date }}</li>
                                     </div>
                                     <div class="d-flex">
                                         <a href="{{ route('admin.shipments.create', $order->id) }}"
@@ -175,6 +175,7 @@
                                                 </div>
                                             </div>
                                         </li>
+                                        <li class="list-group-item">Shipment Date: {{ $shipment->shipment_date }}</li>
                                         <li class="list-group-item">Shipment Sent:
                                             @if ($shipment->shipment_sent == 1)
                                                 Yes
@@ -182,7 +183,6 @@
                                                 No
                                             @endif
                                         </li>
-                                        <li class="list-group-item">Date: {{ $shipment->shipment_date }}</li>
                                     </div>
                                     <div class="d-flex">
                                         <a href="{{ route('admin.shipments.edit', $shipment->id) }}"
@@ -215,6 +215,7 @@
                                             <th scope="col">Description</th>
                                             <th scope="col">Pages</th>
                                             <th scope="col">Price</th>
+                                            <th scope="col">Categories</th>
                                             <th scope="col">Actions</th>
                                         </tr>
                                     </thead>
@@ -232,6 +233,13 @@
                                                 <td>{{ $book->book_description }}</td>
                                                 <td>{{ $book->book_pages }}</td>
                                                 <td>{{ $book->book_price }}</td>
+                                                <td>
+                                                    @foreach ($book_categories as $book_category)
+                                                        @if ($book_category->id == $book->id)
+                                                            {{ $book_category->category_name }}
+                                                        @endif
+                                                    @endforeach
+                                                </td>
                                                 <td>
                                                     <div class="btn-group" role="group" aria-label="Book actions">
                                                         <a href="{{ route('admin.books.edit', $book->id) }}"

@@ -19,6 +19,11 @@ class UserController extends Controller
         return view('admin.dashboard', [
             'users' => User::all(),
             'books' => Book::all(),
+            'book_categories' => DB::table('book_categories')
+                ->join('books', 'book_categories.book_id', '=', 'books.id')
+                ->join('categories', 'book_categories.category_id', '=', 'categories.id')
+                ->select('book_categories.*', 'books.*', 'categories.category_name')
+                ->get(),
             'categories' => Category::all(),
             'orders' => DB::table('orders')
                         ->join('users', 'orders.user_id', '=', 'users.id')

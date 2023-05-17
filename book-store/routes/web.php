@@ -44,6 +44,7 @@ Route::get('/home', function () {
 })->middleware('auth', 'verified');
 
 Route::middleware(['auth', 'isAdmin'])->group(function () {
+    Route::get('/', [UserController::class, 'index'])->name('dashboard');
     Route::get('/admin', [UserController::class, 'index'])->name('dashboard');
 
     // Users

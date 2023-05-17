@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Shipment;
 use Illuminate\Http\Request;
+use App\Mail\ShipmentConfirmation;
+use App\Mail\ShipmentUpdate;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class ShipmentController extends Controller
 {
@@ -25,6 +29,11 @@ class ShipmentController extends Controller
         $shipment->order_id = $order_id;
 
         $shipment->save();
+
+        $user = User::where('id', $shipment->order->user_id)->first();
+
+        // Send email to user
+        Mail::to($user->email)->send(new ShipmentConfirmation($shipment));
 
         return redirect()->route('dashboard')->with('status', 'Shipment has been created');
     }
@@ -46,6 +55,11 @@ class ShipmentController extends Controller
         $shipment->shipment_sent = false;
 
         $shipment->save();
+
+        $user = User::where('id', $shipment->order->user_id)->first();
+
+        // Send email to user
+        Mail::to($user->email)->send(new ShipmentUpdate($shipment));
 
         return redirect()->route('dashboard')->with('status', 'Shipment has been updated');
     }
