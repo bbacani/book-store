@@ -31,6 +31,7 @@ Route::get('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
 Route::get('/cart/payment/{subtotal}', [CartController::class, 'payment'])->name('cart.payment');
 Route::get('/cart/buy/{subtotal}', [CartController::class, 'buy'])->name('cart.buy');
 
+Route::get('/user/{id}', [UserController::class, 'getProfile'])->name('user.profile');
 
 Route::get('/locations', function () {
     return view('locations');

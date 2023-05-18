@@ -8,12 +8,38 @@ use App\Models\Book;
 use App\Models\Shipment;
 use App\Models\Order;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Arr;
 
 class UserController extends Controller
 {
+    public function getProfile($userId)
+    {
+        if (!Auth::check() || Auth::id() != $userId) {
+            return view('user.profile', [
+                'user' => null
+            ]);
+        }
+        $orders = Order::where('user_id', $userId)->get();
+        $shipments = [];
+
+        foreach ($orders as $order) {
+            $shipments_of_order = Shipment::where('order_id', $order->id)->get();
+            foreach ($shipments_of_order as $shipment) {
+                $shipments = Arr::add($shipments, $shipment->id, $shipment);
+            }
+        }
+
+        return view('user.profile', [
+            'user' => User::find($userId),
+            'orders' => $orders,
+            'shipments' => $shipments
+        ]);
+    }
+
     public function index(): View
     {
         return view('admin.dashboard', [
@@ -26,10 +52,10 @@ class UserController extends Controller
                 ->get(),
             'categories' => Category::all(),
             'orders' => DB::table('orders')
-                        ->join('users', 'orders.user_id', '=', 'users.id')
-                        ->select('orders.*', 'users.id AS user_id', 'users.name AS user_name')
-                        ->where('order_completed', '=', true)
-                        ->get(),
+                ->join('users', 'orders.user_id', '=', 'users.id')
+                ->select('orders.*', 'users.id AS user_id', 'users.name AS user_name')
+                ->where('order_completed', '=', true)
+                ->get(),
             'shipments' => Shipment::all(),
         ]);
     }
@@ -57,7 +83,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        
+
         return redirect()->route('dashboard')->with('status', 'User has been deleted');
     }
 }
