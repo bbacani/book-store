@@ -47,28 +47,29 @@ class CartController extends Controller
             $order = new Order();
             $order->order_date = Carbon::create('2024', '02', '25');
             $order->order_completed = false;
+            $order->order_subtotal = 0;
             $order->user_id = $userid;
         } else {
             $order->order_items = $order->order_items . '|';
         }
         $order->order_items = $order->order_items . $item_id;
-        $order->order_subtotal = 100;
         $order->save();
         return redirect('/books');
     }
 
-    public function payment()
+    public function payment($subtotal)
     {
-        return view('cart.payment');
+        return view('cart.payment', ['subtotal' => $subtotal]);
     }
 
-    public function buy()
+    public function buy($subtotal)
     {
         if (!Auth::check()) {
             return redirect('/login');
         }
         $order = Order::where('user_id', Auth::id())->where('order_completed', false)->first();
         $order->order_completed = true;
+        $order->order_subtotal = $subtotal;
         $order->save();
 
         $user = User::where('id', Auth::id())->first();

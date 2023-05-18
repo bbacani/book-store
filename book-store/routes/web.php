@@ -28,8 +28,9 @@ Route::get('/books', [BookController::class, 'index'])->name('books.index');
 
 Route::get('/cart', [CartController::class, 'getCart'])->name('cart.cart');
 Route::get('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
-Route::get('/cart/payment', [CartController::class, 'payment'])->name('cart.payment');
-Route::get('/cart/buy', [CartController::class, 'buy'])->name('cart.buy');
+Route::get('/cart/payment/{subtotal}', [CartController::class, 'payment'])->name('cart.payment');
+Route::get('/cart/buy/{subtotal}', [CartController::class, 'buy'])->name('cart.buy');
+
 
 Route::get('/locations', function () {
     return view('locations');

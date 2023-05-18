@@ -40,7 +40,7 @@
                 <h4>Subtotal: {{$subtotal}}</h3>
             </div>
 
-            <form action="{{ route('cart.payment') }}">
+            <form action="{{ route('cart.payment', $subtotal) }}">
                 @csrf
                 <button type="submit" class="btn btn-primary btn-sm">Proceed to checkout</button>
             </form>

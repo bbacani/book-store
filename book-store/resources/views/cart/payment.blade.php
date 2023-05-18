@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="d-flex justify-content-center align-items-center">
-    <form action="{{ route('cart.buy') }}">
+    <form action="{{ route('cart.buy', $subtotal) }}">
         @csrf
         <button type="submit" class="btn btn-primary btn-sm">Buy</button>
     </form>
