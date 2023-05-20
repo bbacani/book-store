@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ShipmentController;
@@ -61,6 +62,20 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/admin/books/{book}/edit', [BookController::class, 'edit'])->name('admin.books.edit');
     Route::put('/admin/books/{book}', [BookController::class, 'update'])->name('admin.books.update');
 
+    // Authors
+    Route::delete('/admin/authors/{author}', [AuthorController::class, 'destroy'])->name('admin.authors.destroy');
+    Route::get('/admin/authors/create', [AuthorController::class, 'create'])->name('admin.authors.create');
+    Route::post('/admin/authors/store', [AuthorController::class, 'store'])->name('admin.authors.store');
+    Route::get('/admin/authors/{author}/edit', [AuthorController::class, 'edit'])->name('admin.authors.edit');
+    Route::put('/admin/authors/{author}', [AuthorController::class, 'update'])->name('admin.authors.update');
+
+    // Categories
+    Route::delete('/admin/categories/{category}', [CategoryController::class, 'destroy'])->name('admin.categories.destroy');
+    Route::get('/admin/categories/create', [CategoryController::class, 'create'])->name('admin.categories.create');
+    Route::post('/admin/categories/store', [CategoryController::class, 'store'])->name('admin.categories.store');
+    Route::get('/admin/categories/{category}/edit', [CategoryController::class, 'edit'])->name('admin.categories.edit');
+    Route::put('/admin/categories/{category}', [CategoryController::class, 'update'])->name('admin.categories.update');
+
     // Orders
     Route::delete('/admin/orders/{order}', [OrderController::class, 'destroy'])->name('admin.orders.destroy');
     Route::get('/admin/orders/create', [OrderController::class, 'create'])->name('admin.orders.create');
@@ -72,11 +87,4 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::post('/admin/shipments/{order_id}/store', [ShipmentController::class, 'store'])->name('admin.shipments.store');
     Route::get('/admin/shipments/{shipment}/edit', [ShipmentController::class, 'edit'])->name('admin.shipments.edit');
     Route::put('/admin/shipments/{shipment}', [ShipmentController::class, 'update'])->name('admin.shipments.update');
-
-    // Categories
-    Route::delete('/admin/categories/{category}', [CategoryController::class, 'destroy'])->name('admin.categories.destroy');
-    Route::get('/admin/categories/create', [CategoryController::class, 'create'])->name('admin.categories.create');
-    Route::post('/admin/categories/store', [CategoryController::class, 'store'])->name('admin.categories.store');
-    Route::get('/admin/categories/{category}/edit', [CategoryController::class, 'edit'])->name('admin.categories.edit');
-    Route::put('/admin/categories/{category}', [CategoryController::class, 'update'])->name('admin.categories.update');
 });

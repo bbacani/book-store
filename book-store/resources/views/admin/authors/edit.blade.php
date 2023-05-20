@@ -1,10 +1,10 @@
 @extends('auth.template')
 
 @section('content')
-    <!-- Add the form for editing a category -->
+    <!-- Add the form for editing a author -->
     <div class="card-body">
-        <h5>Edit Category</h5>
-        <form action="{{ route('admin.categories.update', $category->id) }}" method="POST">
+        <h5>Edit Author</h5>
+        <form action="{{ route('admin.authors.update', $author->id) }}" method="POST">
             @csrf
             @method('PUT')
             <div class="form-group">

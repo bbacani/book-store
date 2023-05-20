@@ -35,7 +35,11 @@ class CategoryController extends Controller
     {
         $category = Category::findOrFail($id);
 
-        return view('admin.categories.edit', compact('category'));
+        $previousValues = [
+            'name' => $category->category_name,
+        ];
+
+        return view('admin.categories.edit', compact('category', 'previousValues'));
     }
 
     public function update(Request $request, $id)
