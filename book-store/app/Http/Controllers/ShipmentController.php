@@ -22,15 +22,17 @@ class ShipmentController extends Controller
     public function store(Request $request, $order_id)
     {
         $shipment = new Shipment();
-
+        
         $shipment->shipment_date = $request->shipment_date;
         $shipment->shipment_items = implode('|', $request->shipment_items);
         $shipment->shipment_sent = false;
         $shipment->order_id = $order_id;
 
-        $shipment->save();
+        $user = $shipment->order->user;
 
-        $user = User::where('id', $shipment->order->user_id)->first();
+        $shipment->shipment_address = $user->address;
+
+        $shipment->save();
 
         // Send email to user
         Mail::to($user->email)->send(new ShipmentConfirmation($shipment));
