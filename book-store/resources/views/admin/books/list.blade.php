@@ -9,11 +9,7 @@
                     <th scope="col">Id</th>
                     <th scope="col">Title</th>
                     <th scope="col">Image</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Pages</th>
                     <th scope="col">Price</th>
-                    <th scope="col">Authors</th>
-                    <th scope="col">Categories</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
@@ -27,27 +23,10 @@
                                 <img src="{{ $book->book_image }}" alt="{{ $book->book_title }}" height="50">
                             </a>
                         </td>
-                        <td>{{ $book->book_description }}</td>
-                        <td>{{ $book->book_pages }}</td>
                         <td>{{ $book->book_price }}</td>
                         <td>
-                            @foreach ($book_authors as $book_author)
-                                @if ($book_author->id == $book->id)
-                                    {{ $book_author->author_name }}
-                                @endif
-                            @endforeach
-                        </td>
-                        <td>
-                            @foreach ($book_categories as $book_category)
-                                @if ($book_category->id == $book->id)
-                                    {{ $book_category->category_name }}
-                                @endif
-                            @endforeach
-                        </td>
-                        <td>
                             <div class="btn-group" role="group" aria-label="Book actions">
-                                <a href="{{ route('admin.books.edit', $book->id) }}"
-                                    class="btn btn-warning btn-sm">Edit
+                                <a href="{{ route('admin.books.edit', $book->id) }}" class="btn btn-warning btn-sm">Edit
                                 </a>
                                 <form action="{{ route('admin.books.destroy', $book->id) }}" method="POST"
                                     style="display: inline-block;">

@@ -8,6 +8,7 @@
             <div class="card-body">
                 <div>
                     <p><strong>Order ID:</strong> {{ $shipment->order_id }}</p>
+                    <p><strong>Shipment Address:</strong> {{ $shipment->shipment_address }}</p>
                     <div class="card">
                         <div class="card-body">
                             <h6><strong>Shipment Items:</strong></h6>
@@ -17,7 +18,6 @@
                                         <th scope="col">{{ __('ID') }}</th>
                                         <th scope="col">{{ __('Title') }}</th>
                                         <th scope="col">{{ __('Image') }}</th>
-                                        <th scope="col">{{ __('Pages') }}</th>
                                         <th scope="col">{{ __('Price') }}</th>
                                     </tr>
                                 </thead>
@@ -36,7 +36,6 @@
                                                             alt="{{ $book->book_title }}" height="50">
                                                     </a>
                                                 </td>
-                                                <td>{{ $book->book_pages }}</td>
                                                 <td>{{ $book->book_price }}</td>
                                             </tr>
                                         @endif

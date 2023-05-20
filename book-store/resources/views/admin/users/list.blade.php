@@ -10,6 +10,7 @@
                     <p><strong>ID:</strong> {{ $user->id }}</p>
                     <p><strong>Name:</strong> {{ $user->name }}</p>
                     <p><strong>Email:</strong> {{ $user->email }}</p>
+                    <p><strong>Address:</strong> {{ $user->address }}</p>
                     <p><strong>Is Admin:</strong>
                         @if ($user->is_admin == 1)
                             Yes

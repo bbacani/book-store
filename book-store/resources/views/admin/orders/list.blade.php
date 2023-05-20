@@ -9,6 +9,7 @@
                 <div>
                     <p><strong>User ID:</strong> {{ $order->user_id }}</p>
                     <p><strong>User Name:</strong> {{ $order->user_name }}</p>
+                    <p><strong>User Address:</strong> {{ $order->user_address }}</p>
                     <div class="card">
                         <div class="card-body">
                             <h6><strong>Order Items:</strong></h6>
@@ -18,7 +19,6 @@
                                         <th scope="col">{{ __('ID') }}</th>
                                         <th scope="col">{{ __('Title') }}</th>
                                         <th scope="col">{{ __('Image') }}</th>
-                                        <th scope="col">{{ __('Pages') }}</th>
                                         <th scope="col">{{ __('Price') }}</th>
                                     </tr>
                                 </thead>
@@ -35,7 +35,6 @@
                                                             alt="{{ $book->book_title }}" height="50">
                                                     </a>
                                                 </td>
-                                                <td>{{ $book->book_pages }}</td>
                                                 <td>{{ $book->book_price }}</td>
                                             </tr>
                                         @endif
@@ -46,13 +45,6 @@
                     </div>
                     <p><strong>Order Subtotal:</strong> {{ $order->order_subtotal }}</p>
                     <p><strong>Order Date:</strong> {{ $order->order_date }}</p>
-                    <p><strong>Order Completed:</strong>
-                        @if ($order->order_completed == 1)
-                            Yes
-                        @else
-                            No
-                        @endif
-                    </p>
                 </div>
                 <div class="d-flex">
                     <a href="{{ route('admin.shipments.create', $order->id) }}" class="btn btn-primary btn-lg">Ship</a>
