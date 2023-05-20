@@ -42,6 +42,17 @@
                     </span>
                 @enderror
             </div>
+            <div class="form-group">
+                <label for="shipment_sent">Shipment Sent?</label>
+                <select name="shipment_sent" id="shipment_sent"
+                    class="form-control @error('shipment_sent') is-invalid @enderror" required>
+                    <option value="0" @if (!$shipment->shipment_sent) selected @endif>No</option>
+                    <option value="1" @if ($shipment->shipment_sent) selected @endif>Yes</option>
+                </select>
+                @error('shipment_sent')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
             <button type="submit" class="btn btn-primary">Update Shipment</button>
         </form>
     </div>

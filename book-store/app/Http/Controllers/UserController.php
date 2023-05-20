@@ -80,6 +80,7 @@ class UserController extends Controller
 
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->address = $request->address;
         $user->is_admin = $request->is_admin;
 
         $user->save();
