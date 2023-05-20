@@ -4,26 +4,24 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Author extends Model
 {
     use HasFactory;
 
     /**
-     * Get the contact.
+     * Get the contact associated with the author.
      */
-    public function contact(): HasOne
+    public function contact()
     {
         return $this->hasOne(Contact::class);
     }
 
     /**
-     * Get the contact.
+     * The books that belong to the author.
      */
-    public function books(): HasMany
+    public function books()
     {
-        return $this->hasMany(AuthorBook::class);
+        return $this->belongsToMany(Book::class, 'author_books');
     }
 }

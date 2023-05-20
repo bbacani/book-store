@@ -9,7 +9,9 @@ class Category extends Model
 {
     use HasFactory;
 
-    // Define the "books" relationship
+    /**
+     * The books that belong to the category.
+     */
     public function books()
     {
         return $this->belongsToMany(Book::class, 'book_categories');

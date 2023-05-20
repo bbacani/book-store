@@ -10,22 +10,15 @@ class Shipment extends Model
     use HasFactory;
 
     /**
-     * The primary key associated with the table.
-     *
-     * @var string
-     */
-    // protected $primaryKey = 'shipment_id';
-
-    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'id',
+        'shipment_address',
         'shipment_date',
         'shipment_items',
-        // 'order_id',
+        'shipment_sent',
     ];
 
     /**

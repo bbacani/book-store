@@ -10,22 +10,15 @@ class Order extends Model
     use HasFactory;
 
     /**
-     * The primary key associated with the table.
-     *
-     * @var string
-     */
-    // protected $primaryKey = 'order_id';
-
-    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'id',
+        'order_subtotal',
         'order_date',
         'order_items',
-        // 'user_id',
+        'order_completed',
     ];
 
     /**

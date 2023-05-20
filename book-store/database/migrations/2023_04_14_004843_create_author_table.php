@@ -19,10 +19,6 @@ return new class extends Migration
             $table->string('author_name');
             $table->timestamps();
         });
-
-        $a = new Author();
-        $a->author_name = "Luka";
-        $a->save();
     }
 
     /**

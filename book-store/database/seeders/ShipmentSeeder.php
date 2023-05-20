@@ -17,6 +17,7 @@ class ShipmentSeeder extends Seeder
     public function run()
     {
         DB::table('shipments')->insert([
+            'shipment_address' => 'C. Fray Tomás de Berlanga, 7, 41010 Sevilla',
             'shipment_date' => Carbon::create('2024', '02', '24'),
             'shipment_items' => '1|2',
             'shipment_sent' => true,
@@ -24,6 +25,7 @@ class ShipmentSeeder extends Seeder
         ]);
 
         DB::table('shipments')->insert([
+            'shipment_address' => 'C. Fray Tomás de Berlanga, 7, 41010 Sevilla',
             'shipment_date' => Carbon::create('2024', '02', '24'),
             'shipment_items' => '1',
             'shipment_sent' => true,
@@ -31,6 +33,7 @@ class ShipmentSeeder extends Seeder
         ]);
 
         DB::table('shipments')->insert([
+            'shipment_address' => 'C. Fray Tomás de Berlanga, 7, 41010 Sevilla',
             'shipment_date' => Carbon::create('2024', '02', '27'),
             'shipment_items' => '3',
             'shipment_sent' => false,

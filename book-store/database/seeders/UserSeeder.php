@@ -21,6 +21,7 @@ class UserSeeder extends Seeder
             'email' => 'admin@gmail.com',
             'password' => Hash::make('111111'),
             'is_admin' => '1',
+            'address' => 'Miljackina ul. 44A, 10000, Zagreb, Croatia',
         ]);
 
         DB::table('users')->insert([
@@ -28,6 +29,7 @@ class UserSeeder extends Seeder
             'email' => 'test1@gmail.com',
             'password' => Hash::make('111111'),
             'is_admin' => '0',
+            'address' => 'C. Fray Tomás de Berlanga, 7, 41010 Sevilla',
         ]);
 
         DB::table('users')->insert([
@@ -35,6 +37,7 @@ class UserSeeder extends Seeder
             'email' => 'test2@gmail.com',
             'password' => Hash::make('111111'),
             'is_admin' => '0',
+            'address' => 'C. Fray Tomás de Berlanga, 7, 41010 Sevilla',
         ]);
 
         DB::table('users')->insert([
@@ -42,6 +45,7 @@ class UserSeeder extends Seeder
             'email' => 'test3@gmail.com',
             'password' => Hash::make('111111'),
             'is_admin' => '0',
+            'address' => 'C. Fray Tomás de Berlanga, 7, 41010 Sevilla',
         ]);
 
         DB::table('users')->insert([
@@ -49,6 +53,7 @@ class UserSeeder extends Seeder
             'email' => 'test4@gmail.com',
             'password' => Hash::make('111111'),
             'is_admin' => '0',
+            'address' => 'C. Fray Tomás de Berlanga, 7, 41010 Sevilla',
         ]);
     }
 }
