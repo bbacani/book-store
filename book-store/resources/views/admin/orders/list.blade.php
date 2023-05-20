@@ -1,18 +1,21 @@
 <h5 class="d-flex justify-content-between">
     <span>Order List</span>
 </h5>
+
 <ul class="list-group order-list">
     @foreach ($orders as $order)
-        <div class="card-body d-flex justify-content-between align-items-center">
-            <div>
-                <li class="list-group-item">User Id: {{ $order->user_id }}</li>
-                <li class="list-group-item">User Name: {{ $order->user_name }}</li>
-                <li class="list-group-item">Order Items: <div class="card">
+        <li class="list-group-item">
+            <div class="card-body">
+                <div>
+                    <p><strong>User ID:</strong> {{ $order->user_id }}</p>
+                    <p><strong>User Name:</strong> {{ $order->user_name }}</p>
+                    <div class="card">
                         <div class="card-body">
+                            <h6><strong>Order Items:</strong></h6>
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th scope="col">{{ __('Id') }}</th>
+                                        <th scope="col">{{ __('ID') }}</th>
                                         <th scope="col">{{ __('Title') }}</th>
                                         <th scope="col">{{ __('Image') }}</th>
                                         <th scope="col">{{ __('Pages') }}</th>
@@ -24,7 +27,7 @@
                                         @php $book = $books->firstWhere('id', $bookId); @endphp
                                         @if ($book)
                                             <tr>
-                                                <th scope="row">{{ $book->id }}</th>
+                                                <td>{{ $book->id }}</td>
                                                 <td>{{ $book->book_title }}</td>
                                                 <td>
                                                     <a href="{{ $book->book_image }}" target="_blank">
@@ -41,27 +44,25 @@
                             </table>
                         </div>
                     </div>
-                </li>
-                <li class="list-group-item">Order Subtotal: {{ $order->order_subtotal }}</li>
-                <li class="list-group-item">Order Date: {{ $order->order_date }}</li>
-                <li class="list-group-item">Order Completed:
-                    @if ($order->order_completed == 1)
-                        Yes
-                    @else
-                        No
-                    @endif
-                </li>
+                    <p><strong>Order Subtotal:</strong> {{ $order->order_subtotal }}</p>
+                    <p><strong>Order Date:</strong> {{ $order->order_date }}</p>
+                    <p><strong>Order Completed:</strong>
+                        @if ($order->order_completed == 1)
+                            Yes
+                        @else
+                            No
+                        @endif
+                    </p>
+                </div>
+                <div class="d-flex">
+                    <a href="{{ route('admin.shipments.create', $order->id) }}" class="btn btn-primary btn-lg">Ship</a>
+                    <form action="{{ route('admin.orders.destroy', $order->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-lg">Delete</button>
+                    </form>
+                </div>
             </div>
-            <div class="d-flex">
-                <a href="{{ route('admin.shipments.create', $order->id) }}" class="btn btn-primary btn-lg">Ship
-                </a>
-                <form action="{{ route('admin.orders.destroy', $order->id) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger btn-lg">Delete</button>
-                </form>
-            </div>
-        </div>
+        </li>
     @endforeach
 </ul>
-<br>

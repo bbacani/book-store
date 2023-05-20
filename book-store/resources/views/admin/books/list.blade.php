@@ -66,4 +66,3 @@
         <a href="{{ route('admin.books.create') }}" class="btn btn-primary btn-sm">Add Book</a>
     </div>
 </div>
-<br>

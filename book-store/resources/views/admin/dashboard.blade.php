@@ -19,8 +19,9 @@
                 <!-- Right Side Content -->
                 <div class="card">
                     <div class="card-header">
-                        Admin Dashboard
+                        <h5 class="card-title">Admin Dashboard</h5>
                     </div>
+
                     <div class="card-body">
                         @if (session('status'))
                             <div class="alert alert-success" role="alert">
