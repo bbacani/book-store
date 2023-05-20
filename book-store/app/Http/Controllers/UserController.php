@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Author;
 use App\Models\Category;
 use App\Models\Book;
 use App\Models\Shipment;
@@ -45,11 +46,17 @@ class UserController extends Controller
         return view('admin.dashboard', [
             'users' => User::all(),
             'books' => Book::all(),
+            'book_authors' => DB::table('author_books')
+                ->join('books', 'author_books.book_id', '=', 'books.id')
+                ->join('authors', 'author_books.author_id', '=', 'authors.id')
+                ->select('author_books.*', 'books.*', 'authors.author_name')
+                ->get(),
             'book_categories' => DB::table('book_categories')
                 ->join('books', 'book_categories.book_id', '=', 'books.id')
                 ->join('categories', 'book_categories.category_id', '=', 'categories.id')
                 ->select('book_categories.*', 'books.*', 'categories.category_name')
                 ->get(),
+            'authors' => Author::all(),
             'categories' => Category::all(),
             'orders' => DB::table('orders')
                 ->join('users', 'orders.user_id', '=', 'users.id')

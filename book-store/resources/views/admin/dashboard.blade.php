@@ -20,10 +20,10 @@
                     <!-- Add Admin Dashboard Content Here -->
                     <div class="card-body">
                         <h5 class="d-flex justify-content-between">
-                            <span>Customer list</span>
+                            <span>User list</span>
                             <button class="btn btn-secondary btn-sm toggle-list">Hide</button>
                         </h5>
-                        <ul class="list-group customer-list">
+                        <ul class="list-group user-list">
                             @foreach ($users as $user)
                                 <div class="card-body d-flex justify-content-between align-items-center">
                                     <div>
@@ -62,8 +62,8 @@
                             @foreach ($orders as $order)
                                 <div class="card-body d-flex justify-content-between align-items-center">
                                     <div>
-                                        <li class="list-group-item">Customer Id: {{ $order->user_id }}</li>
-                                        <li class="list-group-item">Customer Name: {{ $order->user_name }}</li>
+                                        <li class="list-group-item">User Id: {{ $order->user_id }}</li>
+                                        <li class="list-group-item">User Name: {{ $order->user_name }}</li>
                                         <li class="list-group-item">Order Items: <div class="card">
                                                 <div class="card-body">
                                                     <table class="table table-hover">
@@ -215,6 +215,7 @@
                                             <th scope="col">Description</th>
                                             <th scope="col">Pages</th>
                                             <th scope="col">Price</th>
+                                            <th scope="col">Authors</th>
                                             <th scope="col">Categories</th>
                                             <th scope="col">Actions</th>
                                         </tr>
@@ -233,6 +234,13 @@
                                                 <td>{{ $book->book_description }}</td>
                                                 <td>{{ $book->book_pages }}</td>
                                                 <td>{{ $book->book_price }}</td>
+                                                <td>
+                                                    @foreach ($book_authors as $book_author)
+                                                        @if ($book_author->id == $book->id)
+                                                            {{ $book_author->author_name }}
+                                                        @endif
+                                                    @endforeach
+                                                </td>
                                                 <td>
                                                     @foreach ($book_categories as $book_category)
                                                         @if ($book_category->id == $book->id)
@@ -261,6 +269,55 @@
                             </div>
                             <div class="card-footer text-right">
                                 <a href="{{ route('admin.books.create') }}" class="btn btn-primary btn-sm">Add Book</a>
+                            </div>
+                        </div>
+                        <br>
+
+                        <h5 class="d-flex justify-content-between">
+                            <span>Author list</span>
+                            <button class="btn btn-secondary btn-sm toggle-list">Hide</button>
+                        </h5>
+                        <div class="card author-list">
+                            <div class="card author-list">
+                                <div class="card-body">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Id</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($authors as $author)
+                                                <tr>
+                                                    <th scope="row">{{ $author->id }}</th>
+                                                    <td>{{ $author->author_name }}</td>
+                                                    <td>
+                                                        <div class="btn-group" role="group"
+                                                            aria-label="Author actions">
+                                                            <a href="{{ route('admin.authors.edit', $author->id) }}"
+                                                                class="btn btn-warning btn-sm">Edit
+                                                            </a>
+                                                            <form
+                                                                action="{{ route('admin.authors.destroy', $author->id) }}"
+                                                                method="POST" style="display: inline-block;">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit"
+                                                                    class="btn btn-danger btn-sm">Delete</button>
+                                                            </form>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="card-footer text-right">
+                                    <a href="{{ route('admin.authors.create') }}" class="btn btn-primary btn-sm">Add
+                                        Author</a>
+                                </div>
                             </div>
                         </div>
                         <br>
@@ -312,6 +369,7 @@
                                 </div>
                             </div>
                         </div>
+                        <br>
                     </div>
                 </div>
             </div>

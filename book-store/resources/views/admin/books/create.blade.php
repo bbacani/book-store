@@ -49,6 +49,13 @@
                 @enderror
             </div>
             <div class="form-group">
+                <label for="authors">Authors</label><br>
+                @foreach ($authors as $author)
+                    <input type="checkbox" name="authors[]" value="{{ $author->id }}">
+                    {{ $author->author_name }}<br>
+                @endforeach
+            </div>
+            <div class="form-group">
                 <label for="categories">Categories</label><br>
                 @foreach ($categories as $category)
                     <input type="checkbox" name="categories[]" value="{{ $category->id }}">
