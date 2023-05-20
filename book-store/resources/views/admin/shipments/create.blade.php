@@ -39,7 +39,7 @@
                     </span>
                 @enderror
             </div>
-            <button type="submit" class="btn btn-primary">Create Shipment</button>
+            <button type="submit" class="btn btn-primary">Ship Items</button>
         </form>
     </div>
 

@@ -11,6 +11,7 @@
 
     <body>
         <p>Dear {{ $order->user->name }},</p>
+
         <p>Thank you for your order! We have received the following information:</p>
 
         <ul>
@@ -22,8 +23,6 @@
                                 <tr>
                                     <th scope="col">{{ __('Id') }}</th>
                                     <th scope="col">{{ __('Title') }}</th>
-                                    <th scope="col">{{ __('Image') }}</th>
-                                    <th scope="col">{{ __('Pages') }}</th>
                                     <th scope="col">{{ __('Price') }}</th>
                                 </tr>
                             </thead>
@@ -38,13 +37,6 @@
                                         <tr>
                                             <th scope="row">{{ $book->id }}</th>
                                             <td>{{ $book->book_title }}</td>
-                                            <td>
-                                                <a href="{{ $book->book_image }}" target="_blank">
-                                                    <img src="{{ $book->book_image }}" alt="{{ $book->book_title }}"
-                                                        height="50">
-                                                </a>
-                                            </td>
-                                            <td>{{ $book->book_pages }}</td>
                                             <td>{{ $book->book_price }}</td>
                                         </tr>
                                     @endif

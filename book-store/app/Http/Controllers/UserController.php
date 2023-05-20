@@ -60,7 +60,7 @@ class UserController extends Controller
             'categories' => Category::all(),
             'orders' => DB::table('orders')
                 ->join('users', 'orders.user_id', '=', 'users.id')
-                ->select('orders.*', 'users.id AS user_id', 'users.name AS user_name')
+                ->select('orders.*', 'users.id AS user_id', 'users.name AS user_name', 'users.address AS user_address')
                 ->where('order_completed', '=', true)
                 ->get(),
             'shipments' => Shipment::all(),
@@ -80,6 +80,7 @@ class UserController extends Controller
 
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->address = $request->address;
         $user->is_admin = $request->is_admin;
 
         $user->save();

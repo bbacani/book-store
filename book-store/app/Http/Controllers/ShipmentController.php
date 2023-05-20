@@ -54,7 +54,7 @@ class ShipmentController extends Controller
 
         $shipment->shipment_date = $request->shipment_date;
         $shipment->shipment_items = implode('|', $request->shipment_items);
-        $shipment->shipment_sent = false;
+        $shipment->shipment_sent = $request->shipment_sent;
 
         $shipment->save();
 

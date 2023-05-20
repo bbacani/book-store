@@ -11,7 +11,13 @@
 
     <body>
         <p>Dear {{ $shipment->order->user->name }},</p>
+
         <p>We wanted to let you know that there has been an update to your shipment.</p>
+
+        <p>Your order has been shipped to the following address:
+            <br><b>{{ $shipment->shipment_address }}</b></br>.
+        </p>
+
         <p>The following items have been shipped:</p>
 
         <ul>
@@ -23,8 +29,6 @@
                                 <tr>
                                     <th scope="col">{{ __('Id') }}</th>
                                     <th scope="col">{{ __('Title') }}</th>
-                                    <th scope="col">{{ __('Image') }}</th>
-                                    <th scope="col">{{ __('Pages') }}</th>
                                     <th scope="col">{{ __('Price') }}</th>
                                 </tr>
                             </thead>
@@ -39,13 +43,6 @@
                                         <tr>
                                             <th scope="row">{{ $book->id }}</th>
                                             <td>{{ $book->book_title }}</td>
-                                            <td>
-                                                <a href="{{ $book->book_image }}" target="_blank">
-                                                    <img src="{{ $book->book_image }}" alt="{{ $book->book_title }}"
-                                                        height="50">
-                                                </a>
-                                            </td>
-                                            <td>{{ $book->book_pages }}</td>
                                             <td>{{ $book->book_price }}</td>
                                         </tr>
                                     @endif
@@ -56,6 +53,13 @@
                 </div>
             </li>
             <li class="list-group-item">Shipment Date: {{ $shipment->shipment_date }}</li>
+            <li class="list-group-item">Shipment Sent:
+                @if ($shipment->shipment_sent == 1)
+                    Yes
+                @else
+                    No
+                @endif
+            </li>
         </ul>
 
         <p>If you have any questions or concerns about your shipment, please don't hesitate to contact us.</p>

@@ -2,11 +2,24 @@
 
 @section('content')
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
+        <div class="row">
+            <div class="col-md-3">
+                <!-- Left Side Menu -->
+                <div class="list-group">
+                    <a href="#users" class="list-group-item list-group-item-action" data-bs-toggle="pill">Users</a>
+                    <a href="#orders" class="list-group-item list-group-item-action" data-bs-toggle="pill">Orders</a>
+                    <a href="#shipments" class="list-group-item list-group-item-action" data-bs-toggle="pill">Shipments</a>
+                    <a href="#books" class="list-group-item list-group-item-action" data-bs-toggle="pill">Books</a>
+                    <a href="#authors" class="list-group-item list-group-item-action" data-bs-toggle="pill">Authors</a>
+                    <a href="#categories" class="list-group-item list-group-item-action"
+                        data-bs-toggle="pill">Categories</a>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <!-- Right Side Content -->
                 <div class="card">
                     <div class="card-header">
-                        Admin Dashboard
+                        <h5 class="card-title">Admin Dashboard</h5>
                     </div>
 
                     <div class="card-body">
@@ -17,373 +30,31 @@
                         @endif
                     </div>
 
-                    <!-- Add Admin Dashboard Content Here -->
+                    <!-- Content Sections -->
                     <div class="card-body">
-                        <h5 class="d-flex justify-content-between">
-                            <span>User list</span>
-                            <button class="btn btn-secondary btn-sm toggle-list">Hide</button>
-                        </h5>
-                        <ul class="list-group user-list">
-                            @foreach ($users as $user)
-                                <div class="card-body d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <li class="list-group-item">Id: {{ $user->id }}</li>
-                                        <li class="list-group-item">Name: {{ $user->name }}</li>
-                                        <li class="list-group-item">Email: {{ $user->email }}</li>
-                                        <li class="list-group-item">Is Admin:
-                                            @if ($user->is_admin == 1)
-                                                Yes
-                                            @else
-                                                No
-                                            @endif
-                                        </li>
-                                    </div>
-                                    <div d-flex>
-                                        <a href="{{ route('admin.users.edit', $user->id) }}"
-                                            class="btn btn-warning btn-lg">Edit
-                                        </a>
-                                        <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST"
-                                            style="display: inline-block;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-lg">Delete</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </ul>
-                        <br>
-
-                        <h5 class="d-flex justify-content-between">
-                            <span>Order list</span>
-                            <button class="btn btn-secondary btn-sm toggle-list">Hide</button>
-                        </h5>
-                        <ul class="list-group order-list">
-                            @foreach ($orders as $order)
-                                <div class="card-body d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <li class="list-group-item">User Id: {{ $order->user_id }}</li>
-                                        <li class="list-group-item">User Name: {{ $order->user_name }}</li>
-                                        <li class="list-group-item">Order Items: <div class="card">
-                                                <div class="card-body">
-                                                    <table class="table table-hover">
-                                                        <thead>
-                                                            <tr>
-                                                                <th scope="col">{{ __('Id') }}</th>
-                                                                <th scope="col">{{ __('Title') }}</th>
-                                                                <th scope="col">{{ __('Image') }}</th>
-                                                                <th scope="col">{{ __('Pages') }}</th>
-                                                                <th scope="col">{{ __('Price') }}</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            @foreach (explode('|', $order->order_items) as $bookId)
-                                                                @php $book = $books->firstWhere('id', $bookId); @endphp
-                                                                @if ($book)
-                                                                    <tr>
-                                                                        <th scope="row">{{ $book->id }}</th>
-                                                                        <td>{{ $book->book_title }}</td>
-                                                                        <td>
-                                                                            <a href="{{ $book->book_image }}"
-                                                                                target="_blank">
-                                                                                <img src="{{ $book->book_image }}"
-                                                                                    alt="{{ $book->book_title }}"
-                                                                                    height="50">
-                                                                            </a>
-                                                                        </td>
-                                                                        <td>{{ $book->book_pages }}</td>
-                                                                        <td>{{ $book->book_price }}</td>
-                                                                    </tr>
-                                                                @endif
-                                                            @endforeach
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="list-group-item">Order Subtotal: {{ $order->order_subtotal }}</li>
-                                        <li class="list-group-item">Order Date: {{ $order->order_date }}</li>
-                                        <li class="list-group-item">Order Completed:
-                                            @if ($order->order_completed == 1)
-                                                Yes
-                                            @else
-                                                No
-                                            @endif
-                                        </li>
-                                    </div>
-                                    <div class="d-flex">
-                                        <a href="{{ route('admin.shipments.create', $order->id) }}"
-                                            class="btn btn-primary btn-lg">Ship
-                                        </a>
-                                        <form action="{{ route('admin.orders.destroy', $order->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-lg">Delete</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </ul>
-                        <br>
-
-                        <h5 class="d-flex justify-content-between">
-                            <span>Shipment list</span>
-                            <button class="btn btn-secondary btn-sm toggle-list">Hide</button>
-                        </h5>
-                        <ul class="list-group shipment-list">
-                            @foreach ($shipments as $shipment)
-                                <div class="card-body d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <li class="list-group-item">Order Id: {{ $shipment->order_id }}</li>
-                                        <li class="list-group-item">Shipment Items:
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <table class="table table-hover">
-                                                        <thead>
-                                                            <tr>
-                                                                <th scope="col">{{ __('Id') }}</th>
-                                                                <th scope="col">{{ __('Title') }}</th>
-                                                                <th scope="col">{{ __('Image') }}</th>
-                                                                <th scope="col">{{ __('Pages') }}</th>
-                                                                <th scope="col">{{ __('Price') }}</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            @foreach (explode('|', $shipment->shipment_items) as $book_id)
-                                                                @php
-                                                                    $book = App\Models\Book::find($book_id);
-                                                                @endphp
-                                                                @if ($book)
-                                                                    <tr>
-                                                                        <th scope="row">{{ $book->id }}</th>
-                                                                        <td>{{ $book->book_title }}</td>
-                                                                        <td>
-                                                                            <a href="{{ $book->book_image }}"
-                                                                                target="_blank">
-                                                                                <img src="{{ $book->book_image }}"
-                                                                                    alt="{{ $book->book_title }}"
-                                                                                    height="50">
-                                                                            </a>
-                                                                        </td>
-                                                                        <td>{{ $book->book_pages }}</td>
-                                                                        <td>{{ $book->book_price }}</td>
-                                                                    </tr>
-                                                                @endif
-                                                            @endforeach
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="list-group-item">Shipment Date: {{ $shipment->shipment_date }}</li>
-                                        <li class="list-group-item">Shipment Sent:
-                                            @if ($shipment->shipment_sent == 1)
-                                                Yes
-                                            @else
-                                                No
-                                            @endif
-                                        </li>
-                                    </div>
-                                    <div class="d-flex">
-                                        <a href="{{ route('admin.shipments.edit', $shipment->id) }}"
-                                            class="btn btn-warning btn-lg">Edit
-                                        </a>
-                                        <form action="{{ route('admin.shipments.destroy', $shipment->id) }}"
-                                            method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-lg">Delete</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </ul>
-                        <br>
-
-                        <h5 class="d-flex justify-content-between">
-                            <span>Book list</span>
-                            <button class="btn btn-secondary btn-sm toggle-list">Hide</button>
-                        </h5>
-                        <div class="card book-list">
-                            <div class="card-body">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Id</th>
-                                            <th scope="col">Title</th>
-                                            <th scope="col">Image</th>
-                                            <th scope="col">Description</th>
-                                            <th scope="col">Pages</th>
-                                            <th scope="col">Price</th>
-                                            <th scope="col">Authors</th>
-                                            <th scope="col">Categories</th>
-                                            <th scope="col">Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($books as $book)
-                                            <tr>
-                                                <th scope="row">{{ $book->id }}</th>
-                                                <td>{{ $book->book_title }}</td>
-                                                <td>
-                                                    <a href="{{ $book->book_image }}" target="_blank">
-                                                        <img src="{{ $book->book_image }}" alt="{{ $book->book_title }}"
-                                                            height="50">
-                                                    </a>
-                                                </td>
-                                                <td>{{ $book->book_description }}</td>
-                                                <td>{{ $book->book_pages }}</td>
-                                                <td>{{ $book->book_price }}</td>
-                                                <td>
-                                                    @foreach ($book_authors as $book_author)
-                                                        @if ($book_author->id == $book->id)
-                                                            {{ $book_author->author_name }}
-                                                        @endif
-                                                    @endforeach
-                                                </td>
-                                                <td>
-                                                    @foreach ($book_categories as $book_category)
-                                                        @if ($book_category->id == $book->id)
-                                                            {{ $book_category->category_name }}
-                                                        @endif
-                                                    @endforeach
-                                                </td>
-                                                <td>
-                                                    <div class="btn-group" role="group" aria-label="Book actions">
-                                                        <a href="{{ route('admin.books.edit', $book->id) }}"
-                                                            class="btn btn-warning btn-sm">Edit
-                                                        </a>
-                                                        <form action="{{ route('admin.books.destroy', $book->id) }}"
-                                                            method="POST" style="display: inline-block;">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit"
-                                                                class="btn btn-danger btn-sm">Delete</button>
-                                                        </form>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                        <div class="tab-content">
+                            <div class="tab-pane fade" id="users">
+                                @include('admin.users.list')
                             </div>
-                            <div class="card-footer text-right">
-                                <a href="{{ route('admin.books.create') }}" class="btn btn-primary btn-sm">Add Book</a>
+                            <div class="tab-pane fade" id="orders">
+                                @include('admin.orders.list')
+                            </div>
+                            <div class="tab-pane fade" id="shipments">
+                                @include('admin.shipments.list')
+                            </div>
+                            <div class="tab-pane fade" id="books">
+                                @include('admin.books.list')
+                            </div>
+                            <div class="tab-pane fade" id="authors">
+                                @include('admin.authors.list')
+                            </div>
+                            <div class="tab-pane fade" id="categories">
+                                @include('admin.categories.list')
                             </div>
                         </div>
-                        <br>
-
-                        <h5 class="d-flex justify-content-between">
-                            <span>Author list</span>
-                            <button class="btn btn-secondary btn-sm toggle-list">Hide</button>
-                        </h5>
-                        <div class="card author-list">
-                            <div class="card author-list">
-                                <div class="card-body">
-                                    <table class="table table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Id</th>
-                                                <th scope="col">Name</th>
-                                                <th scope="col">Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($authors as $author)
-                                                <tr>
-                                                    <th scope="row">{{ $author->id }}</th>
-                                                    <td>{{ $author->author_name }}</td>
-                                                    <td>
-                                                        <div class="btn-group" role="group"
-                                                            aria-label="Author actions">
-                                                            <a href="{{ route('admin.authors.edit', $author->id) }}"
-                                                                class="btn btn-warning btn-sm">Edit
-                                                            </a>
-                                                            <form
-                                                                action="{{ route('admin.authors.destroy', $author->id) }}"
-                                                                method="POST" style="display: inline-block;">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button type="submit"
-                                                                    class="btn btn-danger btn-sm">Delete</button>
-                                                            </form>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="card-footer text-right">
-                                    <a href="{{ route('admin.authors.create') }}" class="btn btn-primary btn-sm">Add
-                                        Author</a>
-                                </div>
-                            </div>
-                        </div>
-                        <br>
-
-                        <h5 class="d-flex justify-content-between">
-                            <span>Category list</span>
-                            <button class="btn btn-secondary btn-sm toggle-list">Hide</button>
-                        </h5>
-                        <div class="card category-list">
-                            <div class="card category-list">
-                                <div class="card-body">
-                                    <table class="table table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Id</th>
-                                                <th scope="col">Name</th>
-                                                <th scope="col">Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($categories as $category)
-                                                <tr>
-                                                    <th scope="row">{{ $category->id }}</th>
-                                                    <td>{{ $category->category_name }}</td>
-                                                    <td>
-                                                        <div class="btn-group" role="group"
-                                                            aria-label="Category actions">
-                                                            <a href="{{ route('admin.categories.edit', $category->id) }}"
-                                                                class="btn btn-warning btn-sm">Edit
-                                                            </a>
-                                                            <form
-                                                                action="{{ route('admin.categories.destroy', $category->id) }}"
-                                                                method="POST" style="display: inline-block;">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button type="submit"
-                                                                    class="btn btn-danger btn-sm">Delete</button>
-                                                            </form>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="card-footer text-right">
-                                    <a href="{{ route('admin.categories.create') }}" class="btn btn-primary btn-sm">Add
-                                        Category</a>
-                                </div>
-                            </div>
-                        </div>
-                        <br>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <script>
-        document.querySelectorAll('.toggle-list').forEach(button => {
-            const list = button.parentElement.nextElementSibling;
-            button.addEventListener('click', () => {
-                list.classList.toggle('d-none');
-                const buttonText = list.classList.contains('d-none') ? 'Show' : 'Hide';
-                button.textContent = buttonText;
-            });
-        });
-    </script>
 @endsection
