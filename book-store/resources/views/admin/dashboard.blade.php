@@ -30,15 +30,4 @@
             </div>
         </div>
     </div>
-
-    <script>
-        document.querySelectorAll('.toggle-list').forEach(button => {
-            const list = button.parentElement.nextElementSibling;
-            button.addEventListener('click', () => {
-                list.classList.toggle('d-none');
-                const buttonText = list.classList.contains('d-none') ? 'Show' : 'Hide';
-                button.textContent = buttonText;
-            });
-        });
-    </script>
 @endsection

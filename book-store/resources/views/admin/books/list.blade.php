@@ -1,6 +1,5 @@
 <h5 class="d-flex justify-content-between">
     <span>Book List</span>
-    <button class="btn btn-secondary btn-sm toggle-list">Hide</button>
 </h5>
 <div class="card book-list">
     <div class="card-body">

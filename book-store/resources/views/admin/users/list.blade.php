@@ -1,6 +1,5 @@
 <h5 class="d-flex justify-content-between">
     <span>User List</span>
-    <button class="btn btn-secondary btn-sm toggle-list">Hide</button>
 </h5>
 <ul class="list-group user-list">
     @foreach ($users as $user)

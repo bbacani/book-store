@@ -1,6 +1,5 @@
 <h5 class="d-flex justify-content-between">
     <span>Order List</span>
-    <button class="btn btn-secondary btn-sm toggle-list">Hide</button>
 </h5>
 <ul class="list-group order-list">
     @foreach ($orders as $order)
