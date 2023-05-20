@@ -19,6 +19,10 @@ return new class extends Migration
             $table->string('email');
             $table->timestamps();
         });
+
+        Schema::table('contacts', function (Blueprint $table) {
+            $table->foreign('id')->references('id')->on('authors')->onDelete('cascade');
+        });
     }
 
     /**
@@ -28,6 +32,10 @@ return new class extends Migration
      */
     public function down()
     {
+        Schema::table('contacts', function (Blueprint $table) {
+            $table->dropForeign(['id']);
+        });
+
         Schema::dropIfExists('contacts');
     }
 };
