@@ -9,6 +9,8 @@
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Name</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Email</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
@@ -17,6 +19,8 @@
                     <tr>
                         <td>{{ $author->id }}</td>
                         <td>{{ $author->author_name }}</td>
+                        <td>{{ $author->contact->phone ?? '-' }}</td>
+                        <td>{{ $author->contact->email ?? '-' }}</td>
                         <td>
                             <div class="btn-group" role="group" aria-label="Author actions">
                                 <a href="{{ route('admin.authors.edit', $author->id) }}"

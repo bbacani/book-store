@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Author;
+use App\Models\Contact;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -28,6 +29,14 @@ class AuthorController extends Controller
 
         $author->save();
 
+        $contact = new Contact();
+
+        $contact->id = $author->id;
+        $contact->phone = $request->phone;
+        $contact->email = $request->email;
+
+        $contact->save();
+
         return redirect()->route('dashboard')->with('status', 'Author has been created');
     }
 
@@ -37,6 +46,8 @@ class AuthorController extends Controller
 
         $previousValues = [
             'name' => $author->author_name,
+            'phone' => $author->contact->phone,
+            'email' => $author->contact->email,
         ];
 
         return view('admin.authors.edit', compact('author', 'previousValues'));
@@ -49,6 +60,14 @@ class AuthorController extends Controller
         $author->author_name = $request->name;
 
         $author->save();
+
+        $contact = $author->contact;
+
+        $contact->id = $author->id;
+        $contact->phone = $request->phone;
+        $contact->email = $request->email;
+
+        $contact->save();
 
         return redirect()->route('dashboard')->with('status', 'Author has been updated');
     }
