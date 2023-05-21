@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -15,39 +14,24 @@ class BookCategorySeeder extends Seeder
      */
     public function run()
     {
-        DB::table('book_categories')->insert([
-            'book_id' => '1',
-            'category_id' => '1',
-        ]);
+        $bookCategories = [
+            ['book_title' => 'In Search of Lost Time', 'category_name' => 'Classic Literature'],
+            ['book_title' => 'In Search of Lost Time', 'category_name' => 'Philosophy'],
+            ['book_title' => 'Ulysses', 'category_name' => 'Classic Literature'],
+            ['book_title' => 'Ulysses', 'category_name' => 'Irish Literature'],
+            ['book_title' => 'Don Quixote', 'category_name' => 'Adventure'],
+            ['book_title' => 'Don Quixote', 'category_name' => 'Classic Literature'],
+            ['book_title' => 'Don Quixote', 'category_name' => 'Historical Fiction'],
+        ];
 
-        DB::table('book_categories')->insert([
-            'book_id' => '1',
-            'category_id' => '2',
-        ]);
+        foreach ($bookCategories as $category) {
+            $bookId = DB::table('books')->where('book_title', $category['book_title'])->value('id');
+            $categoryId = DB::table('categories')->where('category_name', $category['category_name'])->value('id');
 
-        DB::table('book_categories')->insert([
-            'book_id' => '2',
-            'category_id' => '1',
-        ]);
-
-        DB::table('book_categories')->insert([
-            'book_id' => '2',
-            'category_id' => '3',
-        ]);
-
-        DB::table('book_categories')->insert([
-            'book_id' => '3',
-            'category_id' => '4',
-        ]);
-
-        DB::table('book_categories')->insert([
-            'book_id' => '3',
-            'category_id' => '1',
-        ]);
-
-        DB::table('book_categories')->insert([
-            'book_id' => '3',
-            'category_id' => '5',
-        ]);
+            DB::table('book_categories')->insert([
+                'book_id' => $bookId,
+                'category_id' => $categoryId,
+            ]);
+        }
     }
 }
