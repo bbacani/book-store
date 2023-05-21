@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             AuthorSeeder::class,
             CategorySeeder::class,
             BookSeeder::class,
+            BookAuthorSeeder::class,
             BookCategorySeeder::class,
             OrderSeeder::class,
             ShipmentSeeder::class,

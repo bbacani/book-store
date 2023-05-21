@@ -24,7 +24,7 @@ class BookAuthorSeeder extends Seeder
             $bookId = DB::table('books')->where('book_title', $author['book_title'])->value('id');
             $authorId = DB::table('authors')->where('author_name', $author['author_name'])->value('id');
 
-            DB::table('book_authors')->insert([
+            DB::table('author_books')->insert([
                 'book_id' => $bookId,
                 'author_id' => $authorId,
             ]);
