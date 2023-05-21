@@ -2,7 +2,7 @@
 
 ## Installation
 
-Run start.sh script which will run all setup commands. It will also run docker-compose.yml so it is not necessary to run it manually.
+Run start.sh script which will run all setup commands.
    ```
    ./start.sh
    ```
@@ -15,5 +15,5 @@ email: admin@gmail.com <br/>
 password: 111111
 
 ## Test User Credentials
-email: test1@gmail.com
+email: test1@gmail.com <br/>
 password: 111111
