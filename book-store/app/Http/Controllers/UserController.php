@@ -91,7 +91,7 @@ class UserController extends Controller
         $userid = Auth::id();
 
         $user = User::find($userid);
-        $user->book_favourites = str_replace('|' . $item_id, '', $user->book_favourites);
+        $user->book_favourites = preg_replace('/\|' . $item_id . '/', '', $user->book_favourites, 1);
         $user->save();
         return redirect('/user/' . $userid . '/favourites');
     }

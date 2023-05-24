@@ -15,7 +15,7 @@
         </thead>
         <tbody>
             @foreach ($books as $book)
-            <tr class="align-baseline">
+            <tr class="align-baseline" onclick="window.location='/book/{{$book->id}}'" style="cursor: pointer;">
                 <th scope="row">{{ $book->id }}</th>
                 <td>{{ $book->book_title }}</td>
                 @if($extended_info)
@@ -30,7 +30,7 @@
                 <td>{{ $book->book_price }}</td>
                 <td>
                     <div class="d-flex">
-                        <a href="{{ route('user.favourites.remove', $book->id) }}" class="btn btn-danger">Remove</a>
+                        <a href="{{ route($route, $book->id) }}" class="btn btn-danger">Remove</a>
                     </div>
                 </td>
             </tr>

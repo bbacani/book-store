@@ -9,7 +9,7 @@
         <div class="card-header">
             Books
         </div>
-        @include('books.info', ['books'=>$books])
+        @include('books.info', ['books'=>$books, 'extended_info' => false, 'route'=> 'user.favourites.remove'])
     </div>
     @else
     <h3>No favourites</h3>

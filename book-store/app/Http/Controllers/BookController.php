@@ -48,6 +48,23 @@ class BookController extends Controller
         ]);
     }
 
+    public function getBook($book_id)
+    {
+        return view('books.profile', [
+            'book' => Book::find($book_id),
+            'book_authors' => DB::table('author_books')
+                ->join('books', 'author_books.book_id', '=', 'books.id')
+                ->join('authors', 'author_books.author_id', '=', 'authors.id')
+                ->select('author_books.*', 'books.*', 'authors.author_name')
+                ->get(),
+            'book_categories' => DB::table('book_categories')
+                ->join('books', 'book_categories.book_id', '=', 'books.id')
+                ->join('categories', 'book_categories.category_id', '=', 'categories.id')
+                ->select('book_categories.*', 'books.*', 'categories.category_name')
+                ->get(),
+        ]);
+    }
+
     public function create()
     {
         $authors = Author::all();
