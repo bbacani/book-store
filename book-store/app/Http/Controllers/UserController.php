@@ -41,6 +41,61 @@ class UserController extends Controller
         ]);
     }
 
+    public function getFavourites($userId)
+    {
+        if (!Auth::check() || Auth::id() != $userId) {
+            return view('user.favourites', [
+                'user' => null
+            ]);
+        }
+
+        $user = User::find($userId);
+        $books = [];
+
+        foreach (explode('|', $user->book_favourites) as $book_id) {
+            if ($book_id) {
+                $book = Book::find($book_id);
+                $books = Arr::add($books, $book->id, $book);
+            }
+        }
+
+        return view('user.favourites', [
+            'extended_info' => false,
+            'canDelete' => true,
+            'user' => $user,
+            'books' => $books
+        ]);
+    }
+
+    public function addBookToFavourites($item_id)
+    {
+        if (!Auth::check()) {
+            return redirect('/login');
+        }
+        $userid = Auth::id();
+
+        $user = User::find($userid);
+        $favourites = explode('|', $user->book_favourites);
+        if (!in_array($item_id, $favourites)) {
+            $user->book_favourites = $user->book_favourites . '|' . $item_id;
+            $user->save();
+        }
+        return redirect('/books');
+    }
+
+    public function removeBookFromFavourites($item_id)
+    {
+        if (!Auth::check()) {
+            return redirect('/login');
+        }
+        $userid = Auth::id();
+
+        $user = User::find($userid);
+        $user->book_favourites = str_replace('|' . $item_id, '', $user->book_favourites);
+        $user->save();
+        return redirect('/user/' . $userid . '/favourites');
+    }
+
     public function index(): View
     {
         return view('admin.dashboard', [
