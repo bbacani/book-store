@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('book_favourites')->default('');
             $table->boolean('is_admin')->default(false);
             $table->string('address');
             $table->rememberToken();

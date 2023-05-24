@@ -33,6 +33,9 @@ Route::get('/cart/payment/{subtotal}', [CartController::class, 'payment'])->name
 Route::get('/cart/buy/{subtotal}', [CartController::class, 'buy'])->name('cart.buy');
 
 Route::get('/user/{id}', [UserController::class, 'getProfile'])->name('user.profile');
+Route::get('/user/{id}/favourites', [UserController::class, 'getFavourites'])->name('user.favourites');
+Route::get('/user/{id}/favourites/add', [UserController::class, 'addBookToFavourites'])->name('user.favourites.add');
+Route::get('/user/{id}/favourites/remove', [UserController::class, 'removeBookFromFavourites'])->name('user.favourites.remove');
 
 Route::get('/locations', function () {
     return view('locations');
