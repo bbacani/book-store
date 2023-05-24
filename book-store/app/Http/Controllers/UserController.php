@@ -121,8 +121,26 @@ class UserController extends Controller
 
     public function index(): View
     {
+        $users = User::all();
+        $scores = [];
+        foreach ($users as $user) {
+            $favourites = explode('|', $user->book_favourites);
+            foreach ($favourites as $favourite) {
+                if (!empty($favourite)) {
+                    if (!in_array($favourite, $scores)) {
+                        $scores += [$favourite => 0];
+                    }
+                    $scores[$favourite]++;
+                }
+            }
+        }
+        $count = -1;
+        if (!empty($scores)) {
+            $count = max($scores);
+        }
+        $fav_book = Book::find(array_search($count, $scores));
         return view('admin.dashboard', [
-            'users' => User::all(),
+            'users' => $users,
             'books' => Book::all(),
             'book_authors' => DB::table('author_books')
                 ->join('books', 'author_books.book_id', '=', 'books.id')
@@ -142,6 +160,8 @@ class UserController extends Controller
                 ->where('order_completed', '=', true)
                 ->get(),
             'shipments' => Shipment::all(),
+            'fav_book' => $fav_book,
+            'count' => $count
         ]);
     }
 
