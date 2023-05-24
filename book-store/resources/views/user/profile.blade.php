@@ -15,14 +15,14 @@
                         <li class="list-group-item">Email: {{ $user->email }}</li>
                     </div>
                 </div>
-                <h5 class="d-flex justify-content-between">
+                <h5 class="d-flex justify-content-between m-2">
                     <span>Order list</span>
                     <button class="btn btn-secondary btn-sm toggle-list">Hide</button>
                 </h5>
                 <ul class="list-group order-list">
                     @foreach ($orders as $order)
                     <div class="card-body d-flex justify-content-between align-items-center">
-                        <div>
+                        <div class="w-100">
                             <li class="list-group-item">Order Items: <div class="card">
                                     <div class="card-body">
                                         <table class="table table-hover">
@@ -30,7 +30,6 @@
                                                 <tr>
                                                     <th scope="col">{{ __('Id') }}</th>
                                                     <th scope="col">{{ __('Title') }}</th>
-                                                    <th scope="col">{{ __('Image') }}</th>
                                                     <th scope="col">{{ __('Pages') }}</th>
                                                     <th scope="col">{{ __('Price') }}</th>
                                                 </tr>
@@ -42,11 +41,6 @@
                                                 <tr>
                                                     <th scope="row">{{ $book->id }}</th>
                                                     <td>{{ $book->book_title }}</td>
-                                                    <td>
-                                                        <a href="{{ $book->book_image }}" target="_blank">
-                                                            <img src="{{ $book->book_image }}" alt="{{ $book->book_title }}" height="50">
-                                                        </a>
-                                                    </td>
                                                     <td>{{ $book->book_pages }}</td>
                                                     <td>{{ $book->book_price }}</td>
                                                 </tr>
@@ -70,16 +64,15 @@
                     </div>
                     @endforeach
                 </ul>
-                <br>
 
-                <h5 class="d-flex justify-content-between">
+                <h5 class="d-flex justify-content-between m-2">
                     <span>Shipment list</span>
                     <button class="btn btn-secondary btn-sm toggle-list">Hide</button>
                 </h5>
                 <ul class="list-group shipment-list">
                     @foreach ($shipments as $shipment)
                     <div class="card-body d-flex justify-content-between align-items-center">
-                        <div>
+                        <div class="w-100">
                             <li class="list-group-item">Shipment Items:
                                 <div class="card">
                                     <div class="card-body">
