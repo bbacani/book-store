@@ -10,7 +10,7 @@ use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ShipmentController;
-
+use App\Http\Controllers\LocaleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +50,8 @@ Route::get('/about', function () {
 Route::get('/home', function () {
     return view('auth.dashboard');
 })->middleware('auth', 'verified');
+
+Route::post('/changeLocale', [LocaleController::class, 'changeLocale'])->name('changeLocale');
 
 Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/', [UserController::class, 'index'])->name('dashboard');
