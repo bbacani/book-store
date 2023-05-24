@@ -24,13 +24,15 @@
                                 ->where('id', $item)
                                 ->first();
                         @endphp
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="item_{{ $item }}"
-                                name="shipment_items[]" value="{{ $item }}">
-                            <label class="form-check-label" for="item_{{ $item }}">
-                                {{ $book->book_title }} - Price: {{ $book->book_price }}
-                            </label>
-                        </div>
+                        @unless (!$book)
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="item_{{ $item }}"
+                                    name="shipment_items[]" value="{{ $item }}">
+                                <label class="form-check-label" for="item_{{ $item }}">
+                                    {{ $book->book_title }} - Price: {{ $book->book_price }}
+                                </label>
+                            </div>
+                        @endunless
                     @endforeach
                 </div>
                 @error('shipment_items')
