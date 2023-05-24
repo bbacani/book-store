@@ -26,11 +26,13 @@ use App\Http\Controllers\ShipmentController;
 Route::get('/', [BookController::class, 'index'])->name('books.index');
 
 Route::get('/books', [BookController::class, 'index'])->name('books.index');
+Route::get('/book/{id}', [BookController::class, 'getBook'])->name('books.profile');
 
 Route::get('/cart', [CartController::class, 'getCart'])->name('cart.cart');
 Route::get('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
 Route::get('/cart/payment/{subtotal}', [CartController::class, 'payment'])->name('cart.payment');
 Route::get('/cart/buy/{subtotal}', [CartController::class, 'buy'])->name('cart.buy');
+Route::get('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
 
 Route::get('/user/{id}', [UserController::class, 'getProfile'])->name('user.profile');
 Route::get('/user/{id}/favourites', [UserController::class, 'getFavourites'])->name('user.favourites');

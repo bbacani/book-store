@@ -21,10 +21,12 @@ class CartController extends Controller
         $book_ids = Order::where('user_id', Auth::id())->where('order_completed', false)->first();
         $books = [];
         $subtotal = 0;
+        $cart_elem_idx = 0;
 
         if (!is_null($book_ids)) {
             foreach (explode('|', $book_ids->order_items) as $book_id) {
-                $books = Arr::add($books, $book_id, Book::find($book_id));
+                $books = Arr::add($books, $cart_elem_idx, Book::find($book_id));
+                $cart_elem_idx += 1;
             }
             foreach ($books as $book) {
                 $subtotal += $book->book_price;
@@ -49,12 +51,23 @@ class CartController extends Controller
             $order->order_completed = false;
             $order->order_subtotal = 0;
             $order->user_id = $userid;
-        } else {
-            $order->order_items = $order->order_items . '|';
         }
-        $order->order_items = $order->order_items . $item_id;
+        $order->order_items = $order->order_items . '|' . $item_id;
         $order->save();
         return redirect('/books');
+    }
+
+    public function remove($item_id)
+    {
+        if (!Auth::check()) {
+            return redirect('/login');
+        }
+        $userid = Auth::id();
+
+        $order = Order::where('user_id', $userid)->where('order_completed', false)->first();
+        $order->order_items = preg_replace('/\|' . $item_id . '/', '', $order->order_items, 1);
+        $order->save();
+        return redirect('/cart');
     }
 
     public function payment($subtotal)

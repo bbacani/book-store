@@ -5,7 +5,7 @@
     @if(count($books) > 0)
     <h3>Cart items</h3>
     <div class="card">
-        @include('books.info', ['books'=>$books])
+        @include('books.info', ['books'=>$books, 'extended_info' => false, 'route'=> 'cart.remove'])
         <div class="card-footer text-right d-flex justify-content-between align-items-center">
             <div>
                 <h4>Subtotal: {{$subtotal}}</h3>
