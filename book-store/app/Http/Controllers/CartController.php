@@ -25,8 +25,10 @@ class CartController extends Controller
 
         if (!is_null($book_ids)) {
             foreach (explode('|', $book_ids->order_items) as $book_id) {
-                $books = Arr::add($books, $cart_elem_idx, Book::find($book_id));
-                $cart_elem_idx += 1;
+                if (!empty($book_id)) {
+                    $books = Arr::add($books, $cart_elem_idx, Book::find($book_id));
+                    $cart_elem_idx += 1;
+                }
             }
             foreach ($books as $book) {
                 $subtotal += $book->book_price;

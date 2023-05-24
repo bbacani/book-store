@@ -53,7 +53,7 @@ class UserController extends Controller
         $books = [];
 
         foreach (explode('|', $user->book_favourites) as $book_id) {
-            if ($book_id) {
+            if (!empty($book_id)) {
                 $book = Book::find($book_id);
                 $books = Arr::add($books, $book->id, $book);
             }
