@@ -41,6 +41,29 @@ class UserController extends Controller
         ]);
     }
 
+    public function getAddress()
+    {
+        return view('user.update_address', ['user' => Auth::user()]);
+    }
+
+    public function updateAddress()
+    {
+        // Retrieve the authenticated user
+        $user = Auth::user();
+
+        // Perform validation on the new address
+        $validatedData = request()->validate([
+            'newAddress' => 'required|string|max:255',
+        ]);
+
+        // Update the user's address
+        $user->address = $validatedData['newAddress'];
+        $user->save();
+
+        // Redirect the user back to the profile page with a success message
+        return redirect()->route('user.profile', ["id" => $user->id])->with('success', 'Address updated successfully.');
+    }
+
     public function getFavourites($userId)
     {
         if (!Auth::check() || Auth::id() != $userId) {
