@@ -12,10 +12,10 @@
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('books.index') }}">{{ __('Books') }}</a>
+                    <a class="nav-link" href="{{ route('books.index') }}">{{ __('messages.books') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('about') }}">{{ __('About Us') }}</a>
+                    <a class="nav-link" href="{{ route('about') }}">{{ __('messages.about_us') }}</a>
                 </li>
             </ul>
         </div>
@@ -23,6 +23,35 @@
     <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
         <ul class="navbar-nav ms-auto">
             <!-- Authentication Links -->
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButtonLocale"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    {{ __('messages.language') }}
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonLocale">
+                    <li>
+                        <form action="{{ route('changeLocale') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="locale" value="en">
+                            <button type="submit" class="dropdown-item">{{ __('messages.language_en') }}</button>
+                        </form>
+                    </li>
+                    <li>
+                        <form action="{{ route('changeLocale') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="locale" value="es">
+                            <button type="submit" class="dropdown-item">{{ __('messages.language_es') }}</button>
+                        </form>
+                    </li>
+                    <li>
+                        <form action="{{ route('changeLocale') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="locale" value="hr">
+                            <button type="submit" class="dropdown-item">{{ __('messages.language_hr') }}</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
             @guest
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -35,11 +64,11 @@
             @else
                 {{-- @if (Auth::user()->email_verified_at) --}}
                 <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButtonUser"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         {{ Auth::user()->name }}
                     </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonUser">
                         <li class="nav-item">
                             <a class="dropdown-item" href="{{ route('cart.cart') }}">{{ __('Cart') }}</a>
                         </li>
