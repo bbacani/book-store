@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('book_favourites')->default('');
             $table->boolean('is_admin')->default(false);
-            $table->string('address');
+            $table->string('address')->default('');
             $table->rememberToken();
             $table->timestamps();
         });
